@@ -1,6 +1,6 @@
 안녕하세요 신입 프론트엔드 개발자 김민성입니다.
 
-URL: https://github.com/kimminseoung/PortFolio
+URL: https://kimminseoung.github.io/PortFolio/
 
 Library: React,framer-motion  
 programming language: typescript,javascript  
