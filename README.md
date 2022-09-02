@@ -2,6 +2,8 @@
 
 저의 포트폴리오 사이트는
 
+URL: https://kimminseoung.github.io/PortFolio/
+
 Animation_Library: React,framer-motion
 CSS: styled-component
 Database: firebase
