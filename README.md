@@ -2,11 +2,11 @@
 
 URL: https://kimminseoung.github.io/PortFolio/
 
-Animation_Library: React,framer-motion
-CSS: styled-component
-Database: firebase
-Library: React
-State management: Recoil
+Animation_Library: React,framer-motion  
+CSS: styled-component  
+Database: firebase  
+Library: React  
+State management: Recoil  
 Use_language: typescript,javascript
 
 사용하여 제작하였습니다.
