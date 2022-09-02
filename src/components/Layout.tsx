@@ -40,7 +40,7 @@ function Layout() {
     <Container>
       <div>
         <Picture>
-          <img src={require("../img/street.jpg")} alt='street' />
+          <img src={require("../img/flowers.png")} alt='street' />
         </Picture>
         <Contents>
           <Outlet />

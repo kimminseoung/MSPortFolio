@@ -92,9 +92,6 @@ function Header() {
             <li>
               <Link to='/etc'>etc</Link>
             </li>
-            <li>
-              <Link to='/etc'>etc2</Link>
-            </li>
           </ul>
         </div>
       </Wrapper>

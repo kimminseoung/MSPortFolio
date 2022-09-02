@@ -4,6 +4,9 @@ import { RecoilRoot } from "recoil";
 import App from "./App";
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -58,15 +61,22 @@ a {
 }
 * {
 	box-sizing: border-box;
+	-ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 }
 `;
 root.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <GlobalStyle />
-        <App />
-      </BrowserRouter>
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+          <GlobalStyle />
+          <App />
+        </BrowserRouter>
+      </RecoilRoot>
+    </QueryClientProvider>
   </React.StrictMode>
 );

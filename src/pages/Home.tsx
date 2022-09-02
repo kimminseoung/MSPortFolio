@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-
-const Container = styled.section`
+import { showHide, showHideChild } from "./About";
+import { useEffect, useRef } from "react";
+import { useInterval } from "../hooks/setInterVal";
+const HomeCotainer = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   background-color: #f6fbff;
   align-items: center;
-
+  & > * {
+    user-select: none;
+  }
 `;
 const Wrapper = styled(motion.div)`
   padding-left: 100px;
@@ -26,35 +30,13 @@ const Wrapper = styled(motion.div)`
     background-color: #333;
     margin-bottom: 30px;
   }
-  #job {
+  .job {
     font-size: 25px;
     margin-bottom: 35px;
     line-height: 30px;
     font-weight: 400;
     color: #7d7789;
     display: flex;
-    #textAni {
-      position: relative;
-      margin-left: 15px;
-      height: 30px;
-      & > div {
-        font-weight: bold;
-        color: #000;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        transition: all 0.5s;
-        perspective: 300px;
-        transform-origin: 50% 100%;
-        &.active {
-          animation: changeText 1s;
-        }
-        &.hidden {
-          animation: changeText 1s;
-        }
-      }
-    }
   }
   .button {
     width: 100%;
@@ -81,66 +63,84 @@ const Wrapper = styled(motion.div)`
       }
     }
   }
+  .textanibox {
+    margin-left: 8px;
+    position: relative;
+    transform-origin: 50% 100%;
+    & > div {
+      position: absolute;
+      width: 100%;
+      bottom: -25px;
+      color: #343434;
+      transition: 0.5s;
+      font-weight: bold;
+      &.isActive {
+        opacity: 1;
+        bottom: 0px;
+        visibility: visible;
+        transform: rotateX(0deg);
+      }
+      &.isHidden {
+        visibility: hidden;
+        opacity: 0;
+        transform: rotateX(-180deg);
+      }
+    }
+  }
 `;
-const showHide = {
-  start: {
-    opacity: 0,
-  },
-  end: {
-    opacity: 1,
-    transition: {
-      duration: 1,
-      staggerChildren: 0.5,
-    },
-  },
-};
-const showHideChild = {
-  start: {
-    y: -5,
-    opacity: 0,
-  },
-  end: {
-    y: 0,
-    opacity: 1,
-  },
-};
+
 function Home() {
+  const divtag = useRef<HTMLDivElement>(null);
+  let arrIndex = 0;
+  const WORD_TYPING_SPEED = 2000;
+  const msgArr = ["Newcomer", "Developer", "Thinker"];
+  const onChangeMsg = () => {
+    if (divtag.current) {
+      if (arrIndex === 0) {
+        divtag?.current.children[0].classList.replace("isHidden", "isActive");
+        divtag?.current.children[1].classList.replace("isActive", "isHidden");
+        divtag?.current.children[2].classList.replace("isActive", "isHidden");
+      } else if (arrIndex === 1) {
+        divtag?.current.children[0].classList.replace("isActive", "isHidden");
+        divtag?.current.children[1].classList.replace("isHidden", "isActive");
+        divtag?.current.children[2].classList.replace("isHidden", "isHidden");
+      } else if (arrIndex === 2) {
+        divtag?.current.children[0].classList.replace("isActive", "isHidden");
+        divtag?.current.children[1].classList.replace("isActive", "isHidden");
+        divtag?.current.children[2].classList.replace("isHidden", "isActive");
+      }
+      arrIndex++;
+      if (arrIndex === 3) {
+        arrIndex = 0;
+      }
+    }
+  };
+  useInterval(() => {
+    onChangeMsg();
+  }, WORD_TYPING_SPEED);
+
   return (
-    <Container>
-      <Wrapper variants={showHide}>
+    <HomeCotainer>
+      <Wrapper variants={showHide} initial='start' animate='end'>
         <motion.h3 variants={showHideChild} className='name'>
           Kim MinSeong
         </motion.h3>
         <motion.span variants={showHideChild} className='line'></motion.span>
-        <motion.h3 variants={showHideChild} id='job'>
+        <motion.h3 variants={showHideChild} className='job'>
           Creative
-          <motion.div
-            id='textAni'
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              transition: {
-                duration: 1,
-                staggerChildren: 0.5,
-              },
-            }}
-          >
-            <motion.div initial={{ y: -5, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className='textPart1'>
-              Rookie
-            </motion.div>
-            <motion.div initial={{ y: -5, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className='textPart2'>
-              Developer
-            </motion.div>
-            <motion.div initial={{ y: -5, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className='textPart3'>
-              Thinker
-            </motion.div>
-          </motion.div>
+          <div className='textanibox' ref={divtag}>
+            {msgArr.map((m, i) => (
+              <div className='isHidden' key={i}>
+                {m}
+              </div>
+            ))}
+          </div>
         </motion.h3>
         <motion.div variants={showHideChild} className='button'>
           <Link to='etc'>contact me</Link>
         </motion.div>
       </Wrapper>
-    </Container>
+    </HomeCotainer>
   );
 }
 export default Home;

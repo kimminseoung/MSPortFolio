@@ -1,33 +1,12 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import TitleForm from "../components/Title";
 
 const Container = styled.section`
   background-color: #f6fbff;
-  padding: 65px 20px 0;
+  padding: 65px 20px 20px;
 `;
 const Wrapper = styled(motion.div)``;
-const Title = styled.div`
-  overflow: hidden;
-  margin-bottom: 15px;
-  span {
-    display: inline-block;
-    position: relative;
-    letter-spacing: 7px;
-    text-transform: uppercase;
-    font-weight: 700;
-    &::after {
-      content: "";
-      margin-left: 25px;
-      position: absolute;
-      width: 5000px;
-      height: 1px;
-      background-color: #7d7789;
-      left: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-`;
 const AboutMe = styled(motion.div)`
   color: #333;
   margin-bottom: 50px;
@@ -57,19 +36,23 @@ const Subheading = styled.h3`
   font-weight: 600;
   padding-left: 10px;
 `;
-const showHide = {
+export const showHide = {
   start: {
     opacity: 0,
+    transition: {
+      duration: 0,
+      staggerChildren: 0.5,
+    },
   },
   end: {
     opacity: 1,
     transition: {
-      duration:1,
+      duration: 1,
       staggerChildren: 0.5,
     },
   },
 };
-const showHideChild = {
+export const showHideChild = {
   start: {
     y: -5,
     opacity: 0,
@@ -79,14 +62,13 @@ const showHideChild = {
     opacity: 1,
   },
 };
+
 function About() {
   return (
     <Container>
       <Wrapper variants={showHide} initial='start' animate='end'>
         <AboutMe variants={showHideChild}>
-          <Title>
-            <span>ABOUT ME</span>
-          </Title>
+          <TitleForm titleName='about me' />
           <div className='text'>
             안녕하세요 저는 프론트엔드 개발자가 되고 싶은 김민성입니다.
             <br />
@@ -94,19 +76,17 @@ function About() {
           </div>
         </AboutMe>
         <AboutMe variants={showHideChild}>
-          <Title>
-            <span>웹 개발자를 하고 싶은 이유와 자바스크립트를 선택한 이유?</span>
-          </Title>
+          <TitleForm titleName='웹 개발자를 하고 싶은 이유와 자바스크립트를 선택한 이유?' />
           <div className='text'>
-            무엇을 만들면 바로 결과물이 눈에 보이는게 재미가 있어 웹 개발자에 도전하고 싶어졌다.<br />
-            개인적으로 효율적인 것을 좋아하는 성향이 있는데 자바스크립트는 서버, 게임 등을 만들 수 있다는 것에<br />
+            무엇을 만들면 바로 결과물이 눈에 보이는게 재미가 있어 웹 개발자에 도전하고 싶어졌다.
+            <br />
+            개인적으로 효율적인 것을 좋아하는 성향이 있는데 자바스크립트는 서버, 게임 등을 만들 수 있다는 것에
+            <br />
             매력을 느껴 선택하게 되었다.
           </div>
         </AboutMe>
         <AboutMe variants={showHideChild}>
-          <Title>
-            <span>- education</span>
-          </Title>
+          <TitleForm titleName='- education' />
           <div className='text'>
             <ul style={{ listStyle: "circle", paddingLeft: "20px" }}>
               <li>2022.03 ~ 서울사이버대학교(컴퓨터공학과) ※재학중</li>
@@ -116,9 +96,7 @@ function About() {
           </div>
         </AboutMe>
         <AboutMe variants={showHideChild}>
-          <Title>
-            <span>- certificate</span>
-          </Title>
+          <TitleForm titleName='- certificate' />
           <div className='text'>
             <ul style={{ listStyle: "circle", paddingLeft: "20px" }}>
               <li>정보처리산업기사(2013)</li>
@@ -126,9 +104,7 @@ function About() {
           </div>
         </AboutMe>
         <AboutMe variants={showHideChild}>
-          <Title>
-            <span>Front end</span>
-          </Title>
+          <TitleForm titleName='Front end' />
           <div className='stacks'>
             <div>
               <Subheading>- basic</Subheading>
@@ -183,7 +159,7 @@ function About() {
                 </TechImage>
               </TechList>
             </div>
-            <div>
+            {/* <div>
               <Subheading>- currently studying</Subheading>
               <TechList>
                 <TechImage>
@@ -202,7 +178,7 @@ function About() {
                   <img src={require("../img/mongo.png")} alt='' />
                 </TechImage>
               </TechList>
-            </div>
+            </div> */}
           </div>
         </AboutMe>
       </Wrapper>

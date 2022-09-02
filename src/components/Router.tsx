@@ -5,6 +5,7 @@ import Etc from './../pages/Etc';
 import Display from './Layout';
 import About from "../pages/About";
 import Project from './../pages/Project';
+import { useState } from "react";
 
 function Router() {
   return (

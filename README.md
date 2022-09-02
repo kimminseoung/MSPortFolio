@@ -2,11 +2,12 @@
 
 저의 포트폴리오 사이트는
 
-# Library: React,framer-motion
-# programming language: typescript,javascript
-# CSS: styled-component
-# state management: Recoil
-
+Animation_Library: React,framer-motion
+CSS: styled-component
+Database: firebase
+Library: React
+State management: Recoil
+Use_language: typescript,javascript
 
 사용하여 제작하였습니다.
 
