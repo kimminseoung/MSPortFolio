@@ -36,7 +36,7 @@ export const getDB = async (): Promise<DocumentData> => {
 // }
 
 export const putData = async  ({ title, text, name, createdDate, boardId }: any) => {
-  const docRef = await addDoc(collection(db, "users", `${boardId}`), {
+  const docRef = await addDoc(collection(db, "users"), {
     id: boardId,
     title,
     text,
