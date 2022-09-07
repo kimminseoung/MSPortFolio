@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/Board/Pagination";
 import { HiChevronDoubleDown, HiChevronDoubleUp } from "react-icons/hi";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { DarkModeValue } from "./../etc/atom";
+import { getBoard } from "../etc/firebase";
+import { DocumentData } from "firebase/firestore";
 
 interface isDark {
   isDark: boolean;
@@ -59,7 +61,7 @@ const BoardList = styled.ul<isDark>`
   li {
     padding: 8px;
     border-radius: 5px;
-    color:${props => props.theme.textColor};
+    color: ${props => props.theme.textColor};
     background-color: ${props => props.theme.bgColor};
     border: ${props => (props.isDark ? "1px solid #ffffff81" : "1px solid #00000058")};
     span {
@@ -70,17 +72,25 @@ const BoardList = styled.ul<isDark>`
 `;
 function Etc() {
   const isDark = useRecoilValue(DarkModeValue);
-
+  const [DB, setDB] = useState([]);
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(res => res.json())
-      .then(data => setPosts(data));
+    getBoard().then(data => {
+      const make = data.docs.map((doc: DocumentData) => ({
+        ...doc.data(),
+      }));
+      setDB(make);
+    });
   }, []);
+  // useEffect(() => {
+  //   fetch("https://jsonplaceholder.typicode.com/posts")
+  //     .then(res => res.json())
+  //     .then(data => setPosts(data));
+  // }, []);
   const [page, setPage] = useState(1); // 페이지 번호
   const [limit, setLimit] = useState(10); //화면에 보여줄 게시판 글 수
   const [posts, setPosts] = useState([]); // DB에 저장한 글
   const offset = (page - 1) * limit; // 1. 10*0 = 0  2. 10*1=10
-
+  console.log(DB);
   return (
     <Board isDark={isDark}>
       <div className='wrapper'>
@@ -102,17 +112,18 @@ function Etc() {
         </header>
         <main>
           <BoardList isDark={isDark}>
-            {posts.slice(offset, offset + limit).map(
+            {DB.slice(offset, offset + limit).map(
               (
-                { id, title, body } // posts.slice(0,8)
+                { id, title, body, name } // posts.slice(0,8)
               ) => (
-                <li key={id} style={{ marginBottom: "8px" }}>
-                  <span style={{ width: "80px", textAlign: "center" }}>{id}</span>
-                  <span className='textTitle' style={{ width: "calc(100% - 200px)", paddingLeft: "5px", borderRight: "1px solid #ddd", borderLeft: "1px solid #ddd" }}>
-                    {title}
-                  </span>
-                  <span style={{ width: "120px", textAlign: "center" }}>글쓴이: 홍길동</span>
-                </li>
+                <Link to={id}>
+                  <li key={id} style={{ marginBottom: "8px" }}>
+                    <span className='textTitle' style={{ width: "calc(100% - 120px)", paddingLeft: "5px", borderRight: "1px solid #ddd" }}>
+                      {title}
+                    </span>
+                    <span style={{ width: "120px", textAlign: "center" }}>{name}</span>
+                  </li>
+                </Link>
               )
             )}
           </BoardList>

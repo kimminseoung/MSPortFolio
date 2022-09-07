@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import styled from "styled-components";
 import { useState } from "react";
-import { putData } from "../etc/firebase";
+import { putData } from "../../etc/firebase";
 import { useRecoilValue } from "recoil";
-import { DarkModeValue } from "./../etc/atom";
+import { DarkModeValue } from "../../etc/atom";
 const Board = styled.div<{ isDark: boolean }>`
   background-color: ${props => props.theme.bgColor};
   height: 100%;

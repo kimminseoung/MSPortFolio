@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { DarkModeValue } from "./../etc/atom";
+import { DarkModeValue } from "../../etc/atom";
 
 const Nav = styled.nav`
   display: flex;

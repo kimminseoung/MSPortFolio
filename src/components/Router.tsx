@@ -5,7 +5,8 @@ import Board from "../pages/Board";
 import Display from "./Layout";
 import About from "../pages/About";
 import Project from "./../pages/Project";
-import WriteBoard from "./WriteBoard";
+import WriteBoard from "./Board/WriteBoard";
+import BoardDetail from "./Board/BoardDetail";
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
         <Route path='/about' element={<About />} />
         <Route path='/project' element={<Project />} />
         <Route path='/board' element={<Board />} />
+        <Route path='/board/:id' element={<BoardDetail />} />
         <Route path='/board/writeBoard' element={<WriteBoard />} />
       </Route>
       <Route path='*' element={<NotFound />} />

@@ -21,22 +21,12 @@ export const getDB = async (): Promise<DocumentData> => {
   return proDB;
 }; // 내가 지정한 db경로에서 꺼내오기
 
-// export async function putData({ title, text, name, createdDate, boardId }: any) {
-//   try {
-//     const docRef = await addDoc(collection(db, "users", `${boardId}`), {
-//       title,
-//       text,
-//       name,
-//       createdDate,
-//     });
-//     console.log("Document written with ID: ", docRef.id);
-//   } catch (e) {
-//     console.error("Error adding document: ", e);
-//   }
-// }
-
-export const putData = async  ({ title, text, name, createdDate, boardId }: any) => {
-  const docRef = await addDoc(collection(db, "users"), {
+export const getBoard = async (): Promise<DocumentData> => {
+  const proDB = await getDocs(collection(db, "users"));
+  return proDB;
+};
+export const putData = async ({ title, text, name, createdDate, boardId }: any) => {
+  await addDoc(collection(db, "users"), {
     id: boardId,
     title,
     text,
