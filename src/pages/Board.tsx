@@ -116,7 +116,7 @@ function Etc() {
               (
                 { id, title, body, name } // posts.slice(0,8)
               ) => (
-                <Link to={id}>
+                <Link to={`/board/${id}`}>
                   <li key={id} style={{ marginBottom: "8px" }}>
                     <span className='textTitle' style={{ width: "calc(100% - 120px)", paddingLeft: "5px", borderRight: "1px solid #ddd" }}>
                       {title}
