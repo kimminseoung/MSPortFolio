@@ -2,67 +2,67 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { showHide, showHideChild } from "./About";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useInterval } from "../hooks/setInterVal";
+import { useRecoilValue } from "recoil";
+import { DarkModeValue } from "./../etc/atom";
 const HomeCotainer = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
-  background-color: #f6fbff;
+  background-color: ${props => props.theme.secondBgColor};
   align-items: center;
   & > * {
     user-select: none;
   }
 `;
-const Wrapper = styled(motion.div)`
+const Wrapper = styled(motion.div)<{ isDark: boolean }>`
   padding-left: 100px;
   .name {
     font-size: 72px;
     font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 30px;
+    color: ${props => props.theme.textColor};
   }
   .line {
     display: inline-block;
     width: 70px;
     height: 5px;
-    background-color: #333;
+    background-color: ${props => props.theme.textColor};
     margin-bottom: 30px;
-  }
-  .job {
-    font-size: 25px;
-    margin-bottom: 35px;
-    line-height: 30px;
-    font-weight: 400;
-    color: #7d7789;
-    display: flex;
   }
   .button {
     width: 100%;
-    height: auto;
-    clear: both;
-    float: left;
     & > a {
       text-decoration: none;
-      color: #fff;
+      color: ${props => props.theme.bgColor};
       display: inline-block;
-      background-color: #333;
+      background-color: ${props => props.theme.textColor};
       padding: 28px 38px;
       line-height: 6px;
       text-transform: none;
-      border: 2px solid #333;
       font-weight: 500;
       font-size: 16px;
       text-transform: capitalize;
       letter-spacing: 1px;
+      border: ${props => (props.isDark ? "2px solid #fff" : "2px solid #333")};
       transition: all 0.3s ease;
       &:hover {
-        background-color: transparent;
-        color: #333;
+        color: ${props => (props.isDark ? props.theme.textColor : props.theme.textColor)};
+        background-color: ${props => (props.isDark ? props.theme.bgColor : "#ddd")};
       }
     }
   }
+`;
+const Animation = styled(motion.h3)<{ isDark: boolean }>`
+  font-size: 25px;
+  margin-bottom: 35px;
+  line-height: 30px;
+  font-weight: 400;
+  color: ${props => (props.isDark ? "dodgerblue" : "#7d7789")};
+  display: flex;
   .textanibox {
     margin-left: 8px;
     position: relative;
@@ -71,7 +71,7 @@ const Wrapper = styled(motion.div)`
       position: absolute;
       width: 100%;
       bottom: -25px;
-      color: #343434;
+      color: ${props => props.theme.textColor};
       transition: 0.5s;
       font-weight: bold;
       &.isActive {
@@ -88,8 +88,8 @@ const Wrapper = styled(motion.div)`
     }
   }
 `;
-
 function Home() {
+  const isDark = useRecoilValue(DarkModeValue);
   const divtag = useRef<HTMLDivElement>(null);
   let arrIndex = 0;
   const WORD_TYPING_SPEED = 2000;
@@ -121,12 +121,12 @@ function Home() {
 
   return (
     <HomeCotainer>
-      <Wrapper variants={showHide} initial='start' animate='end'>
+      <Wrapper isDark={isDark} variants={showHide} initial='start' animate='end'>
         <motion.h3 variants={showHideChild} className='name'>
           Kim MinSeong
         </motion.h3>
-        <motion.span variants={showHideChild} className='line'></motion.span>
-        <motion.h3 variants={showHideChild} className='job'>
+        <motion.span variants={showHideChild} className='line' />
+        <Animation isDark={isDark} variants={showHideChild}>
           Creative
           <div className='textanibox' ref={divtag}>
             {msgArr.map((m, i) => (
@@ -135,9 +135,9 @@ function Home() {
               </div>
             ))}
           </div>
-        </motion.h3>
+        </Animation>
         <motion.div variants={showHideChild} className='button'>
-          <Link to='etc'>contact me</Link>
+          <Link to='board'>contact me</Link>
         </motion.div>
       </Wrapper>
     </HomeCotainer>

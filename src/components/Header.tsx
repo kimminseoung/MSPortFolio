@@ -5,13 +5,14 @@ const HeaderNavi = styled.header`
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: #fff;
+  background-color: ${props => props.theme.bgColor};
   left: 0;
   right: 0;
   z-index: 10;
   .logo {
     font-size: 50px;
     font-weight: bold;
+    color: ${props => props.theme.textColor};
   }
   .menu {
     ul {
@@ -23,7 +24,7 @@ const HeaderNavi = styled.header`
       & > a {
         padding: 0 30px;
         display: inline-block;
-        color: #333;
+        color: ${props => props.theme.textColor};
         font-weight: 500;
         transition: all 0.3s ease;
         position: relative;
@@ -32,14 +33,14 @@ const HeaderNavi = styled.header`
           left: 0;
           position: absolute;
           height: 100%;
-          color: #fff;
+          color: ${props => props.theme.bgColor};
           content: "";
           z-index: -1;
           transition: all 0.6s ease 0.3s;
-          background-color: #333;
+          background-color: ${props => props.theme.textColor};
         }
         &:hover {
-          color: #fff;
+          color: ${props => props.theme.bgColor};
         }
         &:hover::after {
           width: 100%;
@@ -47,10 +48,10 @@ const HeaderNavi = styled.header`
         &.active {
           left: 0;
           height: 0;
-          background-color: #333;
+          background-color: ${props => props.theme.textColor};
           height: 100%;
           z-index: 100;
-          color: #fff;
+          color: ${props => props.theme.bgColor};
         }
       }
     }
@@ -90,7 +91,7 @@ function Header() {
               </Link>
             </li>
             <li>
-              <Link to='/etc'>etc</Link>
+              <Link to='/board'>Board</Link>
             </li>
           </ul>
         </div>

@@ -7,7 +7,8 @@ const FooterBar = styled.footer`
   left: 0;
   right: 0;
   height: 70px;
-  background-color: #fff;
+  background-color: ${props => props.theme.bgColor};
+  color: ${props => props.theme.textColor};
   z-index: 10;
   line-height: 70px;
   padding: 0 70px;

@@ -74,8 +74,8 @@ export interface projectState {
 function Project() {
   const [DB, setDB] = useState([]);
   useEffect(() => {
-    getDB().then(a => {
-      const make = a.docs.map((doc: DocumentData) => ({
+    getDB().then(data => {
+      const make = data.docs.map((doc: DocumentData) => ({
         ...doc.data(),
       }));
       setDB(make);
