@@ -11,6 +11,8 @@ Use_language: typescript,javascript
 
 사용하여 제작하였습니다.
 
-2022-09-07 firebase을 이용하여 게시판 생성
+2022-09-07 
+1. firebase을 이용하여 게시판 생성
+2. 다크모드 기능 추가
 
 좋게 봐주시면 감사하겠습니다.
