@@ -17,7 +17,7 @@ const HomeCotainer = styled.section`
     user-select: none;
   }
 `;
-const Wrapper = styled(motion.div)<{ isDark: boolean }>`
+const Wrapper = styled(motion.div)<{ isdark: boolean }>`
   padding-left: 100px;
   .name {
     font-size: 72px;
@@ -47,21 +47,21 @@ const Wrapper = styled(motion.div)<{ isDark: boolean }>`
       font-size: 16px;
       text-transform: capitalize;
       letter-spacing: 1px;
-      border: ${props => (props.isDark ? "2px solid #fff" : "2px solid #333")};
+      border: ${props => (props.isdark ? "2px solid #fff" : "2px solid #333")};
       transition: all 0.3s ease;
       &:hover {
-        color: ${props => (props.isDark ? props.theme.textColor : props.theme.textColor)};
-        background-color: ${props => (props.isDark ? props.theme.bgColor : "#ddd")};
+        color: ${props => (props.isdark ? props.theme.textColor : props.theme.textColor)};
+        background-color: ${props => (props.isdark ? props.theme.bgColor : "#ddd")};
       }
     }
   }
 `;
-const Animation = styled(motion.h3)<{ isDark: boolean }>`
+const Animation = styled(motion.h3)<{ isdark: boolean }>`
   font-size: 25px;
   margin-bottom: 35px;
   line-height: 30px;
   font-weight: 400;
-  color: ${props => (props.isDark ? "dodgerblue" : "#7d7789")};
+  color: ${props => (props.isdark ? "dodgerblue" : "#7d7789")};
   display: flex;
   .textanibox {
     margin-left: 8px;
@@ -121,12 +121,12 @@ function Home() {
 
   return (
     <HomeCotainer>
-      <Wrapper isDark={isDark} variants={showHide} initial='start' animate='end'>
+      <Wrapper isdark={isDark} variants={showHide} initial='start' animate='end'>
         <motion.h3 variants={showHideChild} className='name'>
           Kim MinSeong
         </motion.h3>
         <motion.span variants={showHideChild} className='line' />
-        <Animation isDark={isDark} variants={showHideChild}>
+        <Animation isdark={isDark} variants={showHideChild}>
           Creative
           <div className='textanibox' ref={divtag}>
             {msgArr.map((m, i) => (

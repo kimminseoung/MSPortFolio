@@ -9,5 +9,3 @@ export const ModalText = atom({
   key: "ModalText",
   default: "",
 });
-
-

@@ -2,13 +2,15 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import TitleForm from "../components/Title";
 import { useEffect, useState } from "react";
-import { getDB } from "../etc/firebase";
+// import { getDB } from "../etc/firebase";
 import { useSetRecoilState } from "recoil";
 import { ModalText } from "../etc/atom";
 import { DocumentData } from "firebase/firestore";
+import { useRecoilValue } from "recoil";
+import { DarkModeValue } from "./../etc/atom";
 
-const Container = styled(motion.section)`
-  background-color: #f6fbff;
+const Container = styled(motion.section)<{isDark:boolean}>`
+  background-color: ${props => (props.isDark ? "#333" : "#f6fbff")};
   padding: 65px 20px 20px;
 `;
 const ContentBox = styled(motion.div)`
@@ -73,20 +75,22 @@ export interface projectState {
 
 function Project() {
   const [DB, setDB] = useState([]);
-  useEffect(() => {
-    getDB().then(data => {
-      const make = data.docs.map((doc: DocumentData) => ({
-        ...doc.data(),
-      }));
-      setDB(make);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getDB().then(data => {
+  //     const make = data.docs.map((doc: DocumentData) => ({
+  //       ...doc.data(),
+  //     }));
+  //     setDB(make);
+  //   });
+  // }, []);
 
   const setId = useSetRecoilState(ModalText);
+  const isDark = useRecoilValue(DarkModeValue);
+
   return (
-    <Container>
+    <Container isDark={isDark}>
       <div>
-        <TitleForm titleName='Project' />
+        <TitleForm  titleName='Project' />
         <ContentBox>
           {DB.map((element: projectState) => (
             <ProjectBox

@@ -56,7 +56,7 @@ function Pagination({ total, limit, page, setPage }: paging) {
         &lt;
       </Button>
       {Array(numPages)
-        .fill(0)
+        .fill(1)
         .map((ele, i) => (
           <Button isDark={isDark} key={i + 1} onClick={() => setPage(i + 1)} aria-current={page === i + 1 ? "page" : undefined}>
             {i + 1}

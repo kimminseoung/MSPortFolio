@@ -1,6 +1,7 @@
 import styled from "styled-components";
-
-const TitleText = styled.div`
+import { useRecoilValue } from "recoil";
+import { DarkModeValue } from "./../etc/atom";
+const TitleText = styled.div<{ isDark: boolean }>`
   overflow: hidden;
   margin-bottom: 15px;
   span {
@@ -9,13 +10,14 @@ const TitleText = styled.div`
     letter-spacing: 7px;
     text-transform: uppercase;
     font-weight: 700;
+    color: ${props => (props.isDark ? "#fff" : "#333")};
     &::after {
       content: "";
       margin-left: 25px;
       position: absolute;
       width: 5000px;
       height: 1px;
-      background-color: #7d7789;
+      background-color: ${props => (props.isDark ? "#fff" : "#7d7789")};
       left: 100%;
       top: 50%;
       transform: translateY(-50%);
@@ -27,8 +29,10 @@ interface titleText {
 }
 
 function TitleForm(props: titleText) {
+  const isDark = useRecoilValue(DarkModeValue);
+
   return (
-    <TitleText>
+    <TitleText isDark={isDark}>
       <span>{props.titleName}</span>
     </TitleText>
   );

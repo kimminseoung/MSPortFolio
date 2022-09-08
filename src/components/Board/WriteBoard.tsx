@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import styled from "styled-components";
 import { useState } from "react";
-import { putData } from "../../etc/firebase";
+import { saveData } from "../../etc/firebase";
 import { useRecoilValue } from "recoil";
 import { DarkModeValue } from "../../etc/atom";
+import { useConfirm } from "../../hooks/useConfirm";
 const Board = styled.div<{ isDark: boolean }>`
   background-color: ${props => props.theme.bgColor};
   height: 100%;
@@ -83,12 +84,13 @@ const Form = styled.form<{ isDark: boolean }>`
     }
   }
 `;
+
 export default function WriteBoard() {
   const isDark = useRecoilValue(DarkModeValue);
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [name, setName] = useState("");
   const [text, setText] = useState("");
-
   const titleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
@@ -107,18 +109,23 @@ export default function WriteBoard() {
     } = e;
     setText(value);
   };
+
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     const boardObj = {
+      boardId: Date.now(),
       title,
       text,
       name,
       createdDate: Date.now(),
-      boardId: Date.now(),
     };
-    console.log(boardObj);
-    putData(boardObj);
+    if (boardObj.text === "" || boardObj.name === "" || boardObj.text === "") {
+      console.log("빈칸입니다.");
+      return;
+    }
+    saveData(boardObj);
+    navigate("/board");
   };
+
   return (
     <Board isDark={isDark}>
       <Link to='/board' className='linkBoard'>
@@ -127,22 +134,18 @@ export default function WriteBoard() {
       <Form onSubmit={formSubmit} isDark={isDark}>
         <p className='formPart'>
           <b>제목</b>
-          <input value={title} type={"text"} onChange={titleChange} placeholder=' 이곳에 글 제목을 넣어주세요 ^^ ' />
+          <input value={title} type={"text"} onChange={titleChange} />
         </p>
         <p className='formPart'>
           <b>작성자</b>
-          <input value={name} type={"text"} onChange={nameChange} placeholder='이름' />
+          <input value={name} type={"text"} onChange={nameChange} />
         </p>
         <p className='formPart'>
-          <textarea value={text} onChange={inputText} placeholder=' 이곳에 글 내용을 넣어주세요 ^^' />
+          <textarea value={text} onChange={inputText} />
         </p>
         <div id='btns'>
-          <button>
-            <Link to='/board'>등록</Link>
-          </button>
-          <button>
-            <Link to='/board'>취소</Link>
-          </button>
+          <button>등록</button>
+          <button>취소</button>
         </div>
       </Form>
     </Board>

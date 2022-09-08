@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import TitleForm from "../components/Title";
+import { useRecoilValue } from "recoil";
+import { DarkModeValue } from "../etc/atom";
 
-const Container = styled.section`
-  background-color: #f6fbff;
+const Container = styled.section<{ isdark: boolean }>`
+  background-color: ${props => (props.isdark ? "#333" : "#f6fbff")};
   padding: 65px 20px 20px;
 `;
 const Wrapper = styled(motion.div)``;
-const AboutMe = styled(motion.div)`
-  color: #333;
+const AboutMe = styled(motion.div)<{ isdark: boolean }>`
+  color: ${props => (props.isdark ? "#fff" : "#333")};
   margin-bottom: 50px;
   .text {
     line-height: 25px;
@@ -64,10 +66,12 @@ export const showHideChild = {
 };
 
 function About() {
+  const isDark = useRecoilValue(DarkModeValue);
+
   return (
-    <Container>
+    <Container isdark={isDark}>
       <Wrapper variants={showHide} initial='start' animate='end'>
-        <AboutMe variants={showHideChild}>
+        <AboutMe isdark={isDark} variants={showHideChild}>
           <TitleForm titleName='about me' />
           <div className='text'>
             안녕하세요 저는 프론트엔드 개발자가 되고 싶은 김민성입니다.
@@ -75,7 +79,7 @@ function About() {
             시간을 내어 제 포트폴리오를 봐주셔서 감사합니다.
           </div>
         </AboutMe>
-        <AboutMe variants={showHideChild}>
+        <AboutMe isdark={isDark} variants={showHideChild}>
           <TitleForm titleName='웹 개발자를 하고 싶은 이유와 자바스크립트를 선택한 이유?' />
           <div className='text'>
             무엇을 만들면 바로 결과물이 눈에 보이는게 재미가 있어 웹 개발자에 도전하고 싶어졌다.
@@ -85,7 +89,7 @@ function About() {
             매력을 느껴 선택하게 되었다.
           </div>
         </AboutMe>
-        <AboutMe variants={showHideChild}>
+        <AboutMe isdark={isDark} variants={showHideChild}>
           <TitleForm titleName='- education' />
           <div className='text'>
             <ul style={{ listStyle: "circle", paddingLeft: "20px" }}>
@@ -95,7 +99,7 @@ function About() {
             </ul>
           </div>
         </AboutMe>
-        <AboutMe variants={showHideChild}>
+        <AboutMe isdark={isDark} variants={showHideChild}>
           <TitleForm titleName='- certificate' />
           <div className='text'>
             <ul style={{ listStyle: "circle", paddingLeft: "20px" }}>
@@ -103,7 +107,7 @@ function About() {
             </ul>
           </div>
         </AboutMe>
-        <AboutMe variants={showHideChild}>
+        <AboutMe isdark={isDark} variants={showHideChild}>
           <TitleForm titleName='Front end' />
           <div className='stacks'>
             <div>

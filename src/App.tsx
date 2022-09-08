@@ -7,7 +7,7 @@ import Router from "./components/Router";
 import { DarkModeValue } from "./etc/atom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
-import { DarkTheme, LightTheme } from "./styles/theme";
+import { DarkTheme, LightTheme } from "./etc/theme";
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,

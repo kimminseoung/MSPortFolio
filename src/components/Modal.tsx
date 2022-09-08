@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ModalText } from "../etc/atom";
 import { DocumentData } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { getDB } from "../etc/firebase";
+// import { getDB } from "../etc/firebase";
 import { projectState } from "../pages/Project";
 const Overlay = styled(motion.div)`
   position: absolute;
@@ -80,14 +80,14 @@ const modalForm = {
 function Modal() {
   const [id, setId] = useRecoilState(ModalText);
   const [DB, setDB] = useState([]);
-  useEffect(() => {
-    getDB().then(a => {
-      const godd = a.docs.map((doc: DocumentData) => ({
-        ...doc.data(),
-      }));
-      setDB(godd);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getDB().then(a => {
+  //     const getData = a.docs.map((doc: DocumentData) => ({
+  //       ...doc.data(),
+  //     }));
+  //     setDB(getData);
+  //   });
+  // }, []);
   return (
     <AnimatePresence>
       {id ? (
