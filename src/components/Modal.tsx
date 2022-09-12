@@ -4,8 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ModalText } from "../etc/atom";
 import { DocumentData } from "firebase/firestore";
 import { useEffect, useState } from "react";
-// import { getDB } from "../etc/firebase";
 import { projectState } from "../pages/Project";
+import { fetchProject } from "../etc/firebase";
+
 const Overlay = styled(motion.div)`
   position: absolute;
   width: 100%;
@@ -80,14 +81,17 @@ const modalForm = {
 function Modal() {
   const [id, setId] = useRecoilState(ModalText);
   const [DB, setDB] = useState([]);
-  // useEffect(() => {
-  //   getDB().then(a => {
-  //     const getData = a.docs.map((doc: DocumentData) => ({
-  //       ...doc.data(),
-  //     }));
-  //     setDB(getData);
-  //   });
-  // }, []);
+  useEffect(() => {
+    fetchProject().then(data => {
+      const context = data.docs.map((doc: DocumentData) => ({
+        ...doc.data(),
+      }));
+      setDB(context);
+    });
+    return () => {
+      fetchProject();
+    };
+  }, []);
   return (
     <AnimatePresence>
       {id ? (
@@ -100,14 +104,14 @@ function Modal() {
           animate='start'
           exit={"end"}
         >
-          {DB.filter((ele: any) => ele.title === id).map((ele: projectState) => (
+          {DB.filter((ele: any) => ele.id === id).map((ele: projectState) => (
             <Contents variants={modalForm} initial='init' animate='start' exit={"end"} key={ele.id} layoutId={id}>
               <div>
-                <img src={require(`../img/${ele.imgUrl}.png`)} alt={`${ele.imgUrl}`} />
+                <img src={require(`../img/${ele.img}.png`)} alt={`${ele.img}`} />
               </div>
               <div style={{ paddingLeft: "15px", paddingTop: "50px" }}>
-                <h3>{ele.title}</h3>
-                <div>◆ 개발기간: {ele.time}</div>
+                <h3>{ele.name}</h3>
+                <div>◆ 개발기간: {ele.state}</div>
                 <ul>
                   <li style={{ paddingBottom: "5px" }}>◆ 기술</li>
                   {ele.skill.map((ele, index) => (

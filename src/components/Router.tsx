@@ -16,9 +16,9 @@ function Router() {
         <Route path='/about' element={<About />} />
         <Route path='/project' element={<Project />} />
         <Route path='/board' element={<Board />} />
-        <Route path='/board/:id' element={<BoardDetail />} />
-        <Route path='/board/writeBoard' element={<WriteBoard />} />
       </Route>
+      <Route path='/board/:id' element={<BoardDetail />} />
+      <Route path='/board/writeBoard' element={<WriteBoard />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );

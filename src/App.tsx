@@ -36,7 +36,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
   padding:0 70px;
-	background-color: ${props=>props.theme.bgColor};
+	background-color: ${props => props.theme.bgColor};
 	font-family: 'Open Sans', sans-serif;
 }
 ol, ul {
@@ -76,11 +76,10 @@ function App() {
     <ThemeProvider theme={isDark ? DarkTheme : LightTheme}>
       <Header />
       <Router />
-      <Footer />
       <Modal />
-      <GlobalStyle />
-
       <DarkMode />
+      <Footer />
+      <GlobalStyle />
     </ThemeProvider>
   );
 }

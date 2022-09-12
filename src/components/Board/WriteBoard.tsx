@@ -5,10 +5,9 @@ import { useState } from "react";
 import { saveData } from "../../etc/firebase";
 import { useRecoilValue } from "recoil";
 import { DarkModeValue } from "../../etc/atom";
-import { useConfirm } from "../../hooks/useConfirm";
 const Board = styled.div<{ isDark: boolean }>`
   background-color: ${props => props.theme.bgColor};
-  height: 100%;
+  margin-top: 100px;
   padding: 0 20px;
   .linkBoard {
     position: relative;
@@ -86,8 +85,8 @@ const Form = styled.form<{ isDark: boolean }>`
 `;
 
 export default function WriteBoard() {
-  const isDark = useRecoilValue(DarkModeValue);
   const navigate = useNavigate();
+  const isDark = useRecoilValue(DarkModeValue);
   const [title, setTitle] = useState("");
   const [name, setName] = useState("");
   const [text, setText] = useState("");
@@ -116,6 +115,7 @@ export default function WriteBoard() {
       title,
       text,
       name,
+      time:"",
       createdDate: Date.now(),
     };
     if (boardObj.text === "" || boardObj.name === "" || boardObj.text === "") {

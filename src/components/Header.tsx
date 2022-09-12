@@ -8,6 +8,7 @@ const HeaderNavi = styled.header`
   background-color: ${props => props.theme.bgColor};
   left: 0;
   right: 0;
+  border-bottom: 1px solid #aaa;
   z-index: 10;
   .logo {
     font-size: 50px;

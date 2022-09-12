@@ -70,9 +70,9 @@ const BoardList = styled.ul<isDark>`
     }
   }
 `;
-interface Iboard {
+export interface Iboard {
   createdDate: number;
-  id: number;
+  id: number | string | undefined;
   name: string;
   text: string;
   title: string;
@@ -83,7 +83,7 @@ function Etc() {
   const [page, setPage] = useState(1); // 페이지 번호
   const limit = useRef<number>(10); //화면에 보여줄 게시판 글 수
   const [posts, setPosts] = useState<Iboard[]>([]); // DB에 저장한 글
-  
+
   useEffect(() => {
     fetchBoard().then(data => {
       const context = data.docs.map((doc: DocumentData) => ({
@@ -93,10 +93,9 @@ function Etc() {
     });
     return () => {
       fetchBoard();
-    }
-  }, []);
+    };
+  }, [posts]);
   const offset = (page - 1) * limit.current;
-
   return (
     <Board isdark={isDark}>
       <div className='wrapper'>
@@ -118,13 +117,18 @@ function Etc() {
         </header>
         <main>
           <BoardList isdark={isDark}>
-            {posts.slice(offset, offset + limit.current).map(({ id, title, name }) => (
-              <Link key={id} to={`/board/${id}`}>
+            {posts.slice(offset, offset + limit.current).map(ele => (
+              <Link
+                key={ele.id}
+                to={{
+                  pathname: `/board/${ele.id}`,
+                }}
+              >
                 <li style={{ marginBottom: "8px" }}>
                   <span className='textTitle' style={{ width: "calc(100% - 120px)", paddingLeft: "5px", borderRight: "1px solid #ddd" }}>
-                    {title}
+                    {ele.title}
                   </span>
-                  <span style={{ width: "120px", textAlign: "center" }}>{name}</span>
+                  <span style={{ width: "120px", textAlign: "center" }}>{ele.name}</span>
                 </li>
               </Link>
             ))}
