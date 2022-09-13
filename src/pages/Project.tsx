@@ -83,6 +83,9 @@ function Project() {
       }));
       setDB(context);
     });
+    return () => {
+      fetchProject();
+    };
   }, []);
 
   return (
