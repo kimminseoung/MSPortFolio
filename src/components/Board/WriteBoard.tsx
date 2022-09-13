@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import styled from "styled-components";
-import { useState } from "react";
 import { saveData } from "../../etc/firebase";
 import { useRecoilValue } from "recoil";
 import { DarkModeValue } from "../../etc/atom";
-const Board = styled.div<{ isDark: boolean }>`
+import { useForm } from "react-hook-form";
+const Board = styled.div<{ isdark: boolean }>`
   background-color: ${props => props.theme.bgColor};
   margin-top: 100px;
   padding: 0 20px;
@@ -35,10 +35,10 @@ const Board = styled.div<{ isDark: boolean }>`
   .backBoard {
     margin-top: 24px;
     font-size: 36px;
-    color: ${props => (props.isDark ? "#Fff" : "#333")};
+    color: ${props => (props.isdark ? "#Fff" : "#333")};
   }
 `;
-const Form = styled.form<{ isDark: boolean }>`
+const Form = styled.form<{ isdark: boolean }>`
   margin-top: 30px;
   .formPart {
     margin-bottom: 10px;
@@ -50,7 +50,7 @@ const Form = styled.form<{ isDark: boolean }>`
       display: block;
       margin-bottom: 10px;
       font-size: 14px;
-      color: ${props => (props.isDark ? "#Fff" : "#333")};
+      color: ${props => (props.isdark ? "#Fff" : "#333")};
     }
     input,
     textarea {
@@ -70,82 +70,92 @@ const Form = styled.form<{ isDark: boolean }>`
     float: right;
     button {
       border: none;
-      background-color: #fff;
+      cursor: pointer;
       color: #333;
-      padding: 5px;
+      padding: 15px 70px;
       border-radius: 8px;
+      transition: 0.3s;
       border: 1px solid #ddd;
       &:first-child {
         margin-right: 5px;
         background-color: #333;
         color: #fff;
+        &:hover {
+          background-color: dodgerblue;
+          font-weight: bold;
+        }
+      }
+      &:last-child {
+        color: #333;
+        &:hover {
+          background-color: crimson;
+          color: #fff;
+          font-weight: bold;
+        }
       }
     }
   }
 `;
-
+type FormValues = {
+  boardId: number;
+  title: string;
+  text: string;
+  name: string;
+  time: string;
+  createdDate: number;
+};
 export default function WriteBoard() {
   const navigate = useNavigate();
   const isDark = useRecoilValue(DarkModeValue);
-  const [title, setTitle] = useState("");
-  const [name, setName] = useState("");
-  const [text, setText] = useState("");
-  const titleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = e;
-    setTitle(value);
-  };
-  const nameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = e;
-    setName(value);
-  };
-  const inputText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const {
-      target: { value },
-    } = e;
-    setText(value);
-  };
 
-  const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const boardObj = {
+  const formSubmit = ({ text, name, title }: FormValues) => {
+    const Board = {
       boardId: Date.now(),
       title,
       text,
       name,
-      time:"",
+      time: new Date().toLocaleString(),
       createdDate: Date.now(),
     };
-    if (boardObj.text === "" || boardObj.name === "" || boardObj.text === "") {
-      console.log("빈칸입니다.");
-      return;
-    }
-    saveData(boardObj);
+    saveData(Board);
     navigate("/board");
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
+
   return (
-    <Board isDark={isDark}>
+    <Board isdark={isDark}>
       <Link to='/board' className='linkBoard'>
         <HiArrowNarrowLeft className='backBoard' />
       </Link>
-      <Form onSubmit={formSubmit} isDark={isDark}>
+      <Form onSubmit={handleSubmit(formSubmit)} isdark={isDark}>
         <p className='formPart'>
           <b>제목</b>
-          <input value={title} type={"text"} onChange={titleChange} />
+          <input {...register("title", { required: "제목 입력은 필수입니다." })} />
+          <small style={{ color: "Red", marginLeft: "15px" }}>{errors.title?.message}</small>
         </p>
         <p className='formPart'>
           <b>작성자</b>
-          <input value={name} type={"text"} onChange={nameChange} />
+          <input {...register("name", { required: "작성자 이름 입력은 필수입니다." })} />
+          <small style={{ color: "Red", marginLeft: "15px" }}>{errors.name?.message}</small>
         </p>
         <p className='formPart'>
-          <textarea value={text} onChange={inputText} />
+          <textarea {...register("text", { required: "내용을 적어주세요 ^^" })} />
+          <small style={{ color: "Red" }}>{errors.text?.message}</small>
         </p>
         <div id='btns'>
           <button>등록</button>
-          <button>취소</button>
+          <button
+            onClick={() => {
+              navigate("/board");
+            }}
+          >
+            취소
+          </button>
         </div>
       </Form>
     </Board>

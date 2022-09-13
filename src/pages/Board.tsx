@@ -76,6 +76,7 @@ export interface Iboard {
   name: string;
   text: string;
   title: string;
+  time: string;
 }
 
 function Etc() {
@@ -94,7 +95,7 @@ function Etc() {
     return () => {
       fetchBoard();
     };
-  }, [posts]);
+  }, []);
   const offset = (page - 1) * limit.current;
   return (
     <Board isdark={isDark}>

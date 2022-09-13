@@ -1,17 +1,19 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDocs, getFirestore, collection, doc, Timestamp, setDoc, increment } from "firebase/firestore";
+import { getDocs, getFirestore, collection, doc, setDoc } from "firebase/firestore";
 import { DocumentData } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC5QcrObmQD5Wie02q-liEXKAJebK7svr4",
-  authDomain: "test-eb8aa.firebaseapp.com",
-  projectId: "test-eb8aa",
-  storageBucket: "test-eb8aa.appspot.com",
-  messagingSenderId: "129505771974",
-  appId: "1:129505771974:web:8b681fb9ea836bfda172c7",
+  apiKey: "AIzaSyB7MSGdzlbvW-0oJZBy4CKUP401Ss1F7iQ",
+  authDomain: "myhome-7b095.firebaseapp.com",
+  projectId: "myhome-7b095",
+  storageBucket: "myhome-7b095.appspot.com",
+  messagingSenderId: "875726256209",
+  appId: "1:875726256209:web:8567e4e5bc7ef78c002070",
+  measurementId: "G-C60QNN46DV",
 };
-const app = initializeApp(firebaseConfig); 
+
+const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 // 게시판 데이터 저장하기
@@ -23,16 +25,16 @@ interface saveDataProps {
   boardId: number;
   time: string;
 }
-export const saveData = async ({ title, text, name, createdDate, boardId }: saveDataProps) => {
+export const saveData = async ({ title, text, name, createdDate, boardId, time }: saveDataProps) => {
   await setDoc(
     doc(db, "boards", `${boardId}`),
     {
-      time: Timestamp.fromDate(new Date()),
+      time,
       title,
       text,
       name,
       createdDate,
-      id: increment(boardId),
+      id: boardId,
     },
     { merge: true }
   );
@@ -40,18 +42,17 @@ export const saveData = async ({ title, text, name, createdDate, boardId }: save
 
 // 게시판 목록 읽어오기
 export const fetchBoard = async (): Promise<DocumentData> => {
-  const proDB = await getDocs(collection(db, "boards"));
-  return proDB;
+  const BoardDB = await getDocs(collection(db, "boards"));
+  return BoardDB;
 };
-
 
 // 프로젝트 읽어오기
 export const fetchProject = async (): Promise<DocumentData> => {
-  const proDB = await getDocs(collection(db, "Projects"));
-  return proDB;
+  const ProDB = await getDocs(collection(db, "Projects"));
+  return ProDB;
 };
 
-/* export const fetchBoard2 = async () => {
+export const fetchBoard2 = async () => {
   const citiesRef = collection(db, "Projects");
 
   await setDoc(doc(citiesRef, "1"), {
@@ -60,7 +61,7 @@ export const fetchProject = async (): Promise<DocumentData> => {
     state: "2022.08~2022.09",
     gitCode: "https://github.com/kimminseoung/PortFolio",
     gitLink: "https://kimminseoung.github.io/portfolio/",
-    img: "mypage",
+    img: "myhome",
     skill: ["React", "TypeScript", "framer-motion", "styled-components", "Recoil", "react - router"],
   });
 
@@ -90,7 +91,7 @@ export const fetchProject = async (): Promise<DocumentData> => {
     state: "2022.06",
     gitCode: "https://github.com/kimminseoung/ToyApp",
     gitLink: "https://kimminseoung.github.io/ToyApp/",
-    img: "todoList",
+    img: "todolist",
     skill: ["HTML", "CSS", "JavaScript"],
   });
 
@@ -104,4 +105,3 @@ export const fetchProject = async (): Promise<DocumentData> => {
     skill: ["HTML", "CSS", "JavaScript"],
   });
 };
- */

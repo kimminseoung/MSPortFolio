@@ -5,12 +5,10 @@ import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { ModalText } from "../etc/atom";
 import { DocumentData } from "firebase/firestore";
-import { useRecoilValue } from "recoil";
-import { DarkModeValue } from "./../etc/atom";
 import { fetchProject } from "../etc/firebase";
 
-const Container = styled(motion.section)<{ isDark: boolean }>`
-  background-color: ${props => (props.isDark ? "#333" : "#f6fbff")};
+const Container = styled(motion.section)`
+  background-color: ${props => (props.theme.bgColor)};
   padding: 65px 20px 20px;
 `;
 const ContentBox = styled(motion.div)`
@@ -75,8 +73,9 @@ export interface projectState {
 
 function Project() {
   const setId = useSetRecoilState(ModalText);
-  const isDark = useRecoilValue(DarkModeValue);
+
   const [DB, setDB] = useState([]);
+
   useEffect(() => {
     fetchProject().then(data => {
       const context = data.docs.map((doc: DocumentData) => ({
@@ -84,13 +83,10 @@ function Project() {
       }));
       setDB(context);
     });
-    return () => {
-      fetchProject();
-    };
   }, []);
 
   return (
-    <Container isDark={isDark}>
+    <Container>
       <div>
         <TitleForm titleName='Project' />
         <ContentBox>

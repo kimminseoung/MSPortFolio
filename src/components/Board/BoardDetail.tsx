@@ -95,6 +95,7 @@ function BoardDetail() {
                 <h3>
                   {ele.title}
                   <b>작성자: {ele.name}</b>
+                  <b>{ele.time}</b>
                 </h3>
               </Title>
               <Text isDark={isDark}>{ele.text}</Text>

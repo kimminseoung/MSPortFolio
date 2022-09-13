@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 interface IUseInterval {
@@ -21,8 +21,8 @@ export const useInterval: IUseInterval = (callback, interval) => {
     }
     if (location !== "/" || interval !== null) {
       // 만약 delay가 null이거나 Url 경로가 home이 아니면
-      let id = setInterval(tick, interval); 
-      return () => clearInterval(id); // 
+      let id = setInterval(tick, interval);
+      return () => clearInterval(id); //
     }
-  }, [interval]);
+  }, [interval, location]);
 };

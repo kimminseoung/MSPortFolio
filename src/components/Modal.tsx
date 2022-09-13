@@ -91,7 +91,7 @@ function Modal() {
     return () => {
       fetchProject();
     };
-  }, []);
+  }, [DB]);
   return (
     <AnimatePresence>
       {id ? (
