@@ -4,13 +4,13 @@ import { getDocs, getFirestore, collection, doc, setDoc } from "firebase/firesto
 import { DocumentData } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB7MSGdzlbvW-0oJZBy4CKUP401Ss1F7iQ",
-  authDomain: "myhome-7b095.firebaseapp.com",
-  projectId: "myhome-7b095",
-  storageBucket: "myhome-7b095.appspot.com",
-  messagingSenderId: "875726256209",
-  appId: "1:875726256209:web:8567e4e5bc7ef78c002070",
-  measurementId: "G-C60QNN46DV",
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDERID,
+  appId: process.env.REACT_APP_APPID,
+  measurementId: process.env.REACT_APP_MEASUREMENTID,
 };
 
 const app = initializeApp(firebaseConfig);
