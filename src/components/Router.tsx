@@ -12,13 +12,13 @@ function Router() {
   return (
     <Routes>
       <Route element={<Display />}>
-        <Route path='/PortFolio/' element={<Home />} />
-        <Route path='/PortFolio/about' element={<About />} />
-        <Route path='/PortFolio/project' element={<Project />} />
-        <Route path='/PortFolio/board' element={<Board />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/project' element={<Project />} />
+        <Route path='/board' element={<Board />} />
       </Route>
-      <Route path='/PortFolio/board/:id' element={<BoardDetail />} />
-      <Route path='/PortFolio/board/writeBoard' element={<WriteBoard />} />
+      <Route path='/board/:id' element={<BoardDetail />} />
+      <Route path='/board/writeBoard' element={<WriteBoard />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );
