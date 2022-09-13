@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/portFolio/static/js/main.4a5edf7d.js",
+    "main.js": "/portFolio/static/js/main.faaf5c73.js",
     "static/media/todye.png": "/portFolio/static/media/todye.237d5cd702d5e61a0015.png",
     "static/media/flowers.png": "/portFolio/static/media/flowers.6efaca280a41ae2fc8e4.png",
     "static/media/ride.png": "/portFolio/static/media/ride.f31e7cbb603f761c670c.png",
@@ -15,9 +15,9 @@
     "static/media/cardgame.png": "/portFolio/static/media/cardgame.fdf4ee22d4b74c6a44a9.png",
     "static/media/html.png": "/portFolio/static/media/html.ff3cf75e3b7cbb4ea77c.png",
     "index.html": "/portFolio/index.html",
-    "main.4a5edf7d.js.map": "/portFolio/static/js/main.4a5edf7d.js.map"
+    "main.faaf5c73.js.map": "/portFolio/static/js/main.faaf5c73.js.map"
   },
   "entrypoints": [
-    "static/js/main.4a5edf7d.js"
+    "static/js/main.faaf5c73.js"
   ]
 }
