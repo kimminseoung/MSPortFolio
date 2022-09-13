@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.js": "/PortFolio/static/js/main.07345480.js",
-    "static/media/todye.png": "/PortFolio/static/media/todye.237d5cd702d5e61a0015.png",
-    "static/media/flowers.png": "/PortFolio/static/media/flowers.6efaca280a41ae2fc8e4.png",
-    "static/media/ride.png": "/PortFolio/static/media/ride.f31e7cbb603f761c670c.png",
-    "static/media/myhome.png": "/PortFolio/static/media/myhome.080dd662599f24557f33.png",
-    "static/media/todolist.png": "/PortFolio/static/media/todolist.6655ecb8bd2b7dccf25d.png",
-    "static/media/coininfo.png": "/PortFolio/static/media/coininfo.9362d83dda25280e3288.png",
-    "static/media/react-query.png": "/PortFolio/static/media/react-query.e19b9d0e362726ffa7de.png",
-    "static/media/styled-component.png": "/PortFolio/static/media/styled-component.bc3e0b79498ffebf7bf8.png",
-    "static/media/recoil.jpg": "/PortFolio/static/media/recoil.1824228068df451b0758.jpg",
-    "static/media/react.png": "/PortFolio/static/media/react.428839d4924b447d4d50.png",
-    "static/media/lottery.png": "/PortFolio/static/media/lottery.e6f6d4c4bcd7867bcbfb.png",
-    "static/media/cardgame.png": "/PortFolio/static/media/cardgame.fdf4ee22d4b74c6a44a9.png",
-    "static/media/html.png": "/PortFolio/static/media/html.ff3cf75e3b7cbb4ea77c.png",
-    "index.html": "/PortFolio/index.html",
-    "main.07345480.js.map": "/PortFolio/static/js/main.07345480.js.map"
+    "main.js": "/portFolio/static/js/main.4a5edf7d.js",
+    "static/media/todye.png": "/portFolio/static/media/todye.237d5cd702d5e61a0015.png",
+    "static/media/flowers.png": "/portFolio/static/media/flowers.6efaca280a41ae2fc8e4.png",
+    "static/media/ride.png": "/portFolio/static/media/ride.f31e7cbb603f761c670c.png",
+    "static/media/myhome.png": "/portFolio/static/media/myhome.080dd662599f24557f33.png",
+    "static/media/todolist.png": "/portFolio/static/media/todolist.6655ecb8bd2b7dccf25d.png",
+    "static/media/coininfo.png": "/portFolio/static/media/coininfo.9362d83dda25280e3288.png",
+    "static/media/react-query.png": "/portFolio/static/media/react-query.e19b9d0e362726ffa7de.png",
+    "static/media/styled-component.png": "/portFolio/static/media/styled-component.bc3e0b79498ffebf7bf8.png",
+    "static/media/recoil.jpg": "/portFolio/static/media/recoil.1824228068df451b0758.jpg",
+    "static/media/react.png": "/portFolio/static/media/react.428839d4924b447d4d50.png",
+    "static/media/lottery.png": "/portFolio/static/media/lottery.e6f6d4c4bcd7867bcbfb.png",
+    "static/media/cardgame.png": "/portFolio/static/media/cardgame.fdf4ee22d4b74c6a44a9.png",
+    "static/media/html.png": "/portFolio/static/media/html.ff3cf75e3b7cbb4ea77c.png",
+    "index.html": "/portFolio/index.html",
+    "main.4a5edf7d.js.map": "/portFolio/static/js/main.4a5edf7d.js.map"
   },
   "entrypoints": [
-    "static/js/main.07345480.js"
+    "static/js/main.4a5edf7d.js"
   ]
 }
