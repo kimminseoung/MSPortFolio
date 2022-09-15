@@ -6,19 +6,21 @@ import { DarkModeValue } from "../etc/atom";
 
 const Container = styled.section<{ isdark: boolean }>`
   background-color: ${props => (props.isdark ? "#333" : "#f6fbff")};
-  padding: 65px 20px 20px;
+  padding: 4.063rem 1.25rem 1.25rem;
 `;
-const Wrapper = styled(motion.div)``;
 const AboutMe = styled(motion.div)<{ isdark: boolean }>`
   color: ${props => (props.isdark ? "#fff" : "#333")};
-  margin-bottom: 50px;
+  margin-bottom: 3.125rem;
   .text {
     line-height: 25px;
   }
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 const TechImage = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
   margin-right: 15px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   img {
@@ -27,16 +29,25 @@ const TechImage = styled.div`
   }
 `;
 const TechList = styled.div`
-  display: flex;
-  padding-top: 10px;
-  padding-left: 22px;
-  margin-bottom: 15px;
+  display: grid;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  grid-template-columns: 100px 100px 100px;
+  gap: 10px;
+  padding-left: 1.375rem;
+  @media ${props => props.theme.mobile} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 const Subheading = styled.h3`
   text-transform: capitalize;
   letter-spacing: 3px;
   font-weight: 600;
   padding-left: 10px;
+  @media ${props => props.theme.mobile} {
+    letter-spacing: 1px;
+  }
 `;
 export const showHide = {
   start: {
@@ -70,22 +81,15 @@ function About() {
 
   return (
     <Container isdark={isDark}>
-      <Wrapper variants={showHide} initial='start' animate='end'>
+      <motion.div variants={showHide} initial='start' animate='end'>
         <AboutMe isdark={isDark} variants={showHideChild}>
           <TitleForm titleName='about me' />
-          <div className='text'>
-            안녕하세요 저는 프론트엔드 개발자가 되고 싶은 김민성입니다.
-            <br />
-            시간을 내어 제 포트폴리오를 봐주셔서 감사합니다.
-          </div>
+          <div className='text'>안녕하세요 저는 프론트엔드 개발자가 되고 싶은 김민성입니다. 시간을 내어 제 포트폴리오를 봐주셔서 감사합니다.</div>
         </AboutMe>
         <AboutMe isdark={isDark} variants={showHideChild}>
           <TitleForm titleName='웹 개발자를 하고 싶은 이유와 자바스크립트를 선택한 이유?' />
           <div className='text'>
-            무엇을 만들면 바로 결과물이 눈에 보이는게 재미가 있어 웹 개발자에 도전하고 싶어졌다.
-            <br />
-            개인적으로 효율적인 것을 좋아하는 성향이 있는데 자바스크립트는 서버, 게임 등을 만들 수 있다는 것에
-            <br />
+            무엇을 만들면 바로 결과물이 눈에 보이는게 재미가 있어 웹 개발자에 도전하고 싶어졌다. 개인적으로 효율적인 것을 좋아하는 성향이 있는데 자바스크립트는 서버, 게임 등을 만들 수 있다는 것에
             매력을 느껴 선택하게 되었다.
           </div>
         </AboutMe>
@@ -163,6 +167,14 @@ function About() {
                 </TechImage>
               </TechList>
             </div>
+            <div>
+              <Subheading>- DataBase</Subheading>
+              <TechList>
+                <TechImage>
+                  <img src={require("../img/fb.png")} alt='' />
+                </TechImage>
+              </TechList>
+            </div>
             {/* <div>
               <Subheading>- currently studying</Subheading>
               <TechList>
@@ -185,7 +197,7 @@ function About() {
             </div> */}
           </div>
         </AboutMe>
-      </Wrapper>
+      </motion.div>
     </Container>
   );
 }

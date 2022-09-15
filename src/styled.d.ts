@@ -5,5 +5,8 @@ declare module "styled-components" {
     bgColor: text;
     textColor: text;
     secondBgColor: text;
+    mobile?: text;
+    desktop?: text;
   }
+
 }

@@ -13,25 +13,25 @@ const HomeCotainer = styled.section`
   display: flex;
   background-color: ${props => props.theme.secondBgColor};
   align-items: center;
-  & > * {
-    user-select: none;
-  }
 `;
 const Wrapper = styled(motion.div)<{ isdark: boolean }>`
-  padding-left: 100px;
+  padding-left: 6.25rem;
+  @media ${props => props.theme.mobile} {
+    padding-left: 4.25rem;
+  }
   .name {
-    font-size: 72px;
+    font-size: 4.5rem;
     font-weight: 800;
     text-transform: uppercase;
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
     color: ${props => props.theme.textColor};
   }
   .line {
     display: inline-block;
-    width: 70px;
-    height: 5px;
+    width: 4.375rem;
+    height: 0.313rem;
     background-color: ${props => props.theme.textColor};
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
   }
   .button {
     width: 100%;
@@ -40,13 +40,12 @@ const Wrapper = styled(motion.div)<{ isdark: boolean }>`
       color: ${props => props.theme.bgColor};
       display: inline-block;
       background-color: ${props => props.theme.textColor};
-      padding: 28px 38px;
-      line-height: 6px;
+      padding: 1.75rem 2.375rem;
+      line-height: 0.375;
       text-transform: none;
       font-weight: 500;
-      font-size: 16px;
       text-transform: capitalize;
-      letter-spacing: 1px;
+      letter-spacing: 0.063rem;
       border: ${props => (props.isdark ? "2px solid #fff" : "2px solid #333")};
       transition: all 0.3s ease;
       &:hover {
@@ -57,20 +56,20 @@ const Wrapper = styled(motion.div)<{ isdark: boolean }>`
   }
 `;
 const Animation = styled(motion.h3)<{ isdark: boolean }>`
-  font-size: 25px;
-  margin-bottom: 35px;
-  line-height: 30px;
+  font-size: 1.563rem;
+  margin-bottom: 2.188rem;
+  line-height: 1.875rem;
   font-weight: 400;
   color: ${props => (props.isdark ? "dodgerblue" : "#7d7789")};
   display: flex;
   .textanibox {
-    margin-left: 8px;
+    margin-left: 0.5rem;
     position: relative;
     transform-origin: 50% 100%;
     & > div {
       position: absolute;
       width: 100%;
-      bottom: -25px;
+      bottom: -1.563rem;
       color: ${props => props.theme.textColor};
       transition: 0.5s;
       font-weight: bold;

@@ -5,10 +5,14 @@ import { useRecoilState } from "recoil";
 import { DarkModeValue } from "../etc/atom";
 
 const Container = styled(motion.div)`
-  position: absolute;
+  position: fixed;
   bottom: 60px;
   right: 50px;
   z-index: 123456;
+  @media ${props => props.theme.mobile} {
+    bottom: 20px;
+    right: 20px;
+  }
 `;
 const Icon = styled.div<{ isDark: boolean }>`
   width: 50px;

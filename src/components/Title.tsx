@@ -23,6 +23,14 @@ const TitleText = styled.div<{ isDark: boolean }>`
       transform: translateY(-50%);
     }
   }
+  @media ${props => props.theme.mobile} {
+    span {
+      letter-spacing: 2px;
+      &::after {
+        /* width: 100%; */
+      }
+    }
+  }
 `;
 interface titleText {
   titleName: string;

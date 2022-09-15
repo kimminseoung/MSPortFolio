@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import MobileMenu from "./MobileMenu";
 
 const HeaderNavi = styled.header`
   position: fixed;
@@ -8,8 +9,15 @@ const HeaderNavi = styled.header`
   background-color: ${props => props.theme.bgColor};
   left: 0;
   right: 0;
-  border-bottom: 1px solid #aaa;
-  z-index: 10;
+  z-index: 999;
+`;
+const Wrapper = styled.nav`
+  display: flex;
+  margin: 0 auto;
+  height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  width: 93%;
   .logo {
     font-size: 50px;
     font-weight: bold;
@@ -57,14 +65,23 @@ const HeaderNavi = styled.header`
       }
     }
   }
-`;
-const Wrapper = styled.nav`
-  display: flex;
-  margin: 0 auto;
-  height: 70px;
-  align-items: center;
-  justify-content: space-between;
-  width: 93%;
+  .mMenu {
+    display: none;
+  }
+  @media ${props => props.theme.mobile} {
+    height: 55px;
+
+    .logo {
+      font-size: 2.125rem;
+      padding-left: 10px;
+    }
+    .menu {
+      display: none;
+    }
+    .mMenu {
+      display: block;
+    }
+  }
 `;
 function Header() {
   const location = useLocation().pathname;
@@ -96,6 +113,7 @@ function Header() {
             </li>
           </ul>
         </div>
+        <MobileMenu />
       </Wrapper>
     </HeaderNavi>
   );

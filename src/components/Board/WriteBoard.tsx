@@ -52,6 +52,10 @@ const Form = styled.form<{ isdark: boolean }>`
       font-size: 14px;
       color: ${props => (props.isdark ? "#Fff" : "#333")};
     }
+    small{
+      font-size: 14px;
+      color: red;
+    }
     input,
     textarea {
       border: 1px solid #ddd;
@@ -93,6 +97,9 @@ const Form = styled.form<{ isdark: boolean }>`
           font-weight: bold;
         }
       }
+    }
+    @media ${props => props.theme.mobile} {
+      float: none;
     }
   }
 `;
@@ -136,16 +143,16 @@ export default function WriteBoard() {
         <p className='formPart'>
           <b>제목</b>
           <input {...register("title", { required: "제목 입력은 필수입니다." })} />
-          <small style={{ color: "Red", marginLeft: "15px" }}>{errors.title?.message}</small>
+          <small >{errors.title?.message}</small>
         </p>
         <p className='formPart'>
           <b>작성자</b>
           <input {...register("name", { required: "작성자 이름 입력은 필수입니다." })} />
-          <small style={{ color: "Red", marginLeft: "15px" }}>{errors.name?.message}</small>
+          <small>{errors.name?.message}</small>
         </p>
         <p className='formPart'>
           <textarea {...register("text", { required: "내용을 적어주세요 ^^" })} />
-          <small style={{ color: "Red" }}>{errors.text?.message}</small>
+          <small >{errors.text?.message}</small>
         </p>
         <div id='btns'>
           <button>등록</button>

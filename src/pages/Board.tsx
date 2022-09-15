@@ -7,6 +7,14 @@ import { useRecoilValue } from "recoil";
 import { DarkModeValue } from "./../etc/atom";
 import { fetchBoard } from "../etc/firebase";
 import { DocumentData } from "firebase/firestore";
+export interface Iboard {
+  createdDate: number;
+  id: number | string | undefined;
+  name: string;
+  text: string;
+  title: string;
+  time: string;
+}
 
 interface isDark {
   isdark: boolean;
@@ -14,7 +22,7 @@ interface isDark {
 const Board = styled.div<isDark>`
   background-color: ${props => (props.isdark ? props.theme.bgColor : "#f6fffb")};
   height: 100%;
-  padding: 0 20px;
+  padding: 0 1.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,14 +31,14 @@ const Board = styled.div<isDark>`
   }
   .wrapper {
     width: 100%;
-    height: 500px;
+    height: 31.25rem;
   }
   header {
     display: flex;
-    padding: 0 20px;
+    padding: 0 1.25rem;
     justify-content: space-between;
-    margin-bottom: 35px;
-    #Btns {
+    margin-bottom: 2.188rem;
+    /* #Btns {
       span {
         margin: 0 12px;
         cursor: pointer;
@@ -39,13 +47,13 @@ const Board = styled.div<isDark>`
           color: ${props => (props.isdark ? "#fff" : "#333")};
         }
       }
-    }
+    } */
     .writeBtn {
       background-color: dodgerblue;
       border-radius: 8px;
-      padding: 3px;
       color: #fff;
       transition: 0.5s;
+      padding: 0.625rem 1.25rem;
       &:hover {
         background-color: orangered;
       }
@@ -57,27 +65,26 @@ const BoardList = styled.ul<isDark>`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    width: calc(100% - 7.5rem);
+    padding-left: 0.313rem;
+    border-right: 1px solid #ddd;
+  }
+  .titleName {
+    width: 7.5rem;
+    text-align: center;
   }
   li {
-    padding: 8px;
-    border-radius: 5px;
+    padding: 0.5rem;
+    border-radius: 0.313rem;
     color: ${props => props.theme.textColor};
     background-color: ${props => props.theme.bgColor};
     border: ${props => (props.isdark ? "1px solid #ffffff81" : "1px solid #00000058")};
     span {
       display: inline-block;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
   }
 `;
-export interface Iboard {
-  createdDate: number;
-  id: number | string | undefined;
-  name: string;
-  text: string;
-  title: string;
-  time: string;
-}
 
 function Etc() {
   const isDark = useRecoilValue(DarkModeValue); // 다크모드 상태
@@ -108,12 +115,12 @@ function Etc() {
             <span className='writeBtn'>
               <Link to={"WriteBoard"}>글쓰기</Link>
             </span>
-            <span>
+            {/*             <span>
               <HiChevronDoubleDown />
             </span>
             <span>
               <HiChevronDoubleUp />
-            </span>
+            </span> */}
           </div>
         </header>
         <main>
@@ -126,10 +133,8 @@ function Etc() {
                 }}
               >
                 <li style={{ marginBottom: "8px" }}>
-                  <span className='textTitle' style={{ width: "calc(100% - 120px)", paddingLeft: "5px", borderRight: "1px solid #ddd" }}>
-                    {ele.title}
-                  </span>
-                  <span style={{ width: "120px", textAlign: "center" }}>{ele.name}</span>
+                  <span className='textTitle'>{ele.title}</span>
+                  <span className='titleName'>{ele.name}</span>
                 </li>
               </Link>
             ))}

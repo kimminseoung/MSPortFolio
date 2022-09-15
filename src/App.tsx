@@ -6,8 +6,8 @@ import Modal from "./components/Modal";
 import Router from "./components/Router";
 import { DarkModeValue } from "./etc/atom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-
 import { DarkTheme, LightTheme } from "./etc/theme";
+
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -33,9 +33,23 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+html {
+	
+	@media ${props => props.theme.desktop}{
+		font-size: 16px;
+  }
+  @media ${props => props.theme.mobile}{
+		font-size: 14px;
+  }
+}
 body {
 	line-height: 1;
-  padding:0 70px;
+	@media ${props => props.theme.desktop}{
+		padding:0 70px;
+  }
+  @media ${props => props.theme.mobile}{
+		padding: 0;
+  }
 	background-color: ${props => props.theme.bgColor};
 	font-family: 'Open Sans', sans-serif;
 }
@@ -57,10 +71,8 @@ table {
 a {
 	text-decoration: none;
 	color:inherit;
-
 }
 * {
-	user-select: none;
 	box-sizing: border-box;
 	-ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
