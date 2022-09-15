@@ -18,4 +18,5 @@ Use_language: typescript,javascript
 2022-09-13
 1. firebase을 이용하여 게시판 (글쓰기,글보기)완성
   
-
+2022-09-15
+2. 반응형으로 제작
