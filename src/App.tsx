@@ -3,7 +3,7 @@ import DarkMode from "./components/DarkMode";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Modal from "./components/Modal";
-import Router from "./components/Router";
+import Router from "./etc/Router";
 import { DarkModeValue } from "./etc/atom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { DarkTheme, LightTheme } from "./etc/theme";

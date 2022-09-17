@@ -3,43 +3,36 @@ import styled from "styled-components";
 import SideMenu from "./SideMenu";
 
 const Container = styled.main`
-  @media ${props => props.theme.desktop} {
-    position: absolute;
-    top: 70px;
-    bottom: 70px;
-    left: 70px;
-    right: 70px;
-    overflow: hidden;
-    & > div {
-      height: 100%;
-      display: flex;
-    }
+  position: absolute;
+  top: 70px;
+  bottom: 70px;
+  left: 70px;
+  right: 70px;
+  overflow: hidden;
+  & > div {
+    height: 100%;
+    display: flex;
   }
   @media ${props => props.theme.mobile} {
     position: static;
   }
 `;
 const Picture = styled.div`
-  @media ${props => props.theme.desktop} {
-    width: 40%;
-    background-color: transparent;
-    position: relative;
-    & > img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  width: 35%;
+  position: relative;
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
+
   @media ${props => props.theme.mobile} {
     display: none;
   }
 `;
 const Contents = styled.div`
-  width: calc(100% - 40%);
-  background-color: transparent;
+  width: calc(100% - 35%);
+  background-color: ${props=>props.theme.bgColor};
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -49,7 +42,6 @@ const Contents = styled.div`
     height: 100vh;
   }
 `;
-
 function Layout() {
   return (
     <Container>
@@ -59,7 +51,7 @@ function Layout() {
         </Picture>
         <Contents>
           <Outlet />
-          <SideMenu/>
+          <SideMenu />
         </Contents>
       </div>
     </Container>

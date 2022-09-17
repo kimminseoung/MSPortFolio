@@ -10,10 +10,8 @@ const FooterBar = styled.footer`
   z-index: 10;
   background-color: ${props => props.theme.bgColor};
   color: ${props => props.theme.textColor};
-  @media ${props => props.theme.desktop} {
-    position: fixed;
-    padding: 0 70px;
-  }
+  position: fixed;
+  padding: 0 70px;
   @media ${props => props.theme.mobile} {
     display: none;
   }

@@ -10,25 +10,28 @@ import { fetchProject } from "../etc/firebase";
 const Overlay = styled(motion.div)`
   position: absolute;
   width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  height: 100%;
   z-index: 11111;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${props => props.theme.mobile} {
+    padding: 0 1.875rem;
+  }
 `;
 const Contents = styled(motion.div)`
+  overflow-y: scroll;
   background-color: rgba(255, 255, 255, 1);
-  border-radius: 20px;
-  height: 200px;
+  border-radius: 1.25rem;
   box-shadow: 0 2px 3px rgba(255, 255, 255, 0.1), 0 10px 20px rgba(255, 255, 255, 0.06);
   display: flex;
-  padding: 20px;
+  padding: 1.25rem;
   & > div {
     width: 50%;
     h3 {
-      font-size: 28px;
+      font-size: 1.75rem;
     }
     img {
       border-radius: 15px;
@@ -36,9 +39,34 @@ const Contents = styled(motion.div)`
       height: 100%;
       object-fit: cover;
     }
-    & > * {
-      margin-bottom: 15px;
+    a {
+      display: block;
+      padding-left: 1.375rem;
+      margin-top: 0.938rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      color: dodgerblue;
     }
+  }
+  .text {
+    padding-left: 0.938rem;
+    padding-top: 0.938rem;
+    & > div {
+      margin-bottom: 1.875rem;
+    }
+  }
+  .skillList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+  }
+  @media ${props => props.theme.mobile} {
+    padding: 6px;
+    & > div {
+      width: 100%;
+    }
+    flex-direction: column-reverse;
   }
 `;
 const modalBackGround = {
@@ -109,30 +137,26 @@ function Modal() {
               <div>
                 <img src={require(`../img/${ele.img}.png`)} alt={`${ele.img}`} />
               </div>
-              <div style={{ paddingLeft: "15px", paddingTop: "50px" }}>
-                <h3>{ele.name}</h3>
+              <div className='text'>
+                <div>
+                  <h3>{ele.name}</h3>
+                </div>
                 <div>◆ 개발기간: {ele.state}</div>
-                <ul>
-                  <li style={{ paddingBottom: "5px" }}>◆ 기술</li>
-                  {ele.skill.map((ele, index) => (
-                    <li key={index} style={{ paddingLeft: "20px", marginBottom: "5px" }}>
-                      - {ele}
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  <span style={{ paddingBottom: "5px" }}>◆ 기술</span>
+                  <ul className='skillList'>
+                    {ele.skill.map((ele, index) => (
+                      <li key={index}>- {ele}</li>
+                    ))}
+                  </ul>
+                </div>
                 <div>
                   ◆ GitPage
-                  <br />
-                  <a style={{ paddingLeft: "22px", fontSize: "14px", paddingTop: "5px" }} href={ele.gitLink}>
-                    {ele.gitLink}
-                  </a>
+                  <a href={ele.gitLink}>{ele.gitLink}</a>
                 </div>
                 <div>
                   ◆ GitCode
-                  <br />
-                  <a style={{ paddingLeft: "22px", fontSize: "14px", paddingTop: "5px" }} href={ele.gitLink}>
-                    {ele.gitCode}
-                  </a>
+                  <a href={ele.gitLink}>{ele.gitCode}</a>
                 </div>
               </div>
             </Contents>

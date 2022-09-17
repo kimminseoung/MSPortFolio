@@ -4,17 +4,15 @@ import { motion } from "framer-motion";
 import { showHide, showHideChild } from "./About";
 import { useRef } from "react";
 import { useInterval } from "../hooks/setInterVal";
-import { useRecoilValue } from "recoil";
-import { DarkModeValue } from "./../etc/atom";
+
 const HomeCotainer = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
-  background-color: ${props => props.theme.secondBgColor};
   align-items: center;
 `;
-const Wrapper = styled(motion.div)<{ isdark: boolean }>`
+const Wrapper = styled(motion.div)`
   padding-left: 6.25rem;
   @media ${props => props.theme.mobile} {
     padding-left: 4.25rem;
@@ -30,7 +28,7 @@ const Wrapper = styled(motion.div)<{ isdark: boolean }>`
     display: inline-block;
     width: 4.375rem;
     height: 0.313rem;
-    background-color: ${props => props.theme.textColor};
+    background-color: ${props => props.theme.bgColor};
     margin-bottom: 1.875rem;
   }
   .button {
@@ -46,21 +44,21 @@ const Wrapper = styled(motion.div)<{ isdark: boolean }>`
       font-weight: 500;
       text-transform: capitalize;
       letter-spacing: 0.063rem;
-      border: ${props => (props.isdark ? "2px solid #fff" : "2px solid #333")};
+      border: 2px solid ${props => props.theme.textColor};
       transition: all 0.3s ease;
       &:hover {
-        color: ${props => (props.isdark ? props.theme.textColor : props.theme.textColor)};
-        background-color: ${props => (props.isdark ? props.theme.bgColor : "#ddd")};
+        color: ${props => props.theme.textColor};
+        background-color: ${props => props.theme.bgColor};
       }
     }
   }
 `;
-const Animation = styled(motion.h3)<{ isdark: boolean }>`
+const Animation = styled(motion.h3)`
   font-size: 1.563rem;
   margin-bottom: 2.188rem;
   line-height: 1.875rem;
   font-weight: 400;
-  color: ${props => (props.isdark ? "dodgerblue" : "#7d7789")};
+  color: ${props => props.theme.textColor};
   display: flex;
   .textanibox {
     margin-left: 0.5rem;
@@ -88,7 +86,6 @@ const Animation = styled(motion.h3)<{ isdark: boolean }>`
   }
 `;
 function Home() {
-  const isDark = useRecoilValue(DarkModeValue);
   const divtag = useRef<HTMLDivElement>(null);
   let arrIndex = 0;
   const WORD_TYPING_SPEED = 2000;
@@ -120,12 +117,12 @@ function Home() {
 
   return (
     <HomeCotainer>
-      <Wrapper isdark={isDark} variants={showHide} initial='start' animate='end'>
+      <Wrapper  variants={showHide} initial='start' animate='end'>
         <motion.h3 variants={showHideChild} className='name'>
           Kim MinSeong
         </motion.h3>
         <motion.span variants={showHideChild} className='line' />
-        <Animation isdark={isDark} variants={showHideChild}>
+        <Animation  variants={showHideChild}>
           Creative
           <div className='textanibox' ref={divtag}>
             {msgArr.map((m, i) => (
@@ -136,7 +133,7 @@ function Home() {
           </div>
         </Animation>
         <motion.div variants={showHideChild} className='button'>
-          <Link to='board'>contact me</Link>
+          <Link to='project'>go project</Link>
         </motion.div>
       </Wrapper>
     </HomeCotainer>

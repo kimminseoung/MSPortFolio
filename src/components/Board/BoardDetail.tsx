@@ -8,8 +8,12 @@ import { fetchBoard } from "../../etc/firebase";
 import { DocumentData } from "firebase/firestore";
 import { Iboard } from "../../pages/Board";
 
-const Contaienr = styled.div<{ isDark: boolean }>`
-  margin-top: 70px;
+const Contaienr = styled.div`
+  margin-top: 4.375rem;
+`;
+const Wrapper = styled.div<{ isDark: boolean }>`
+  width: 60rem;
+  margin: 0 auto;
   color: ${props => (props.isDark ? "#Fff" : "#333")};
   background-color: ${props => props.theme.bgColor};
   .linkBoard {
@@ -39,10 +43,10 @@ const Contaienr = styled.div<{ isDark: boolean }>`
       font-size: 36px;
     }
   }
-`;
-const Wrapper = styled.div`
-  width: 960px;
-  margin: 0 auto;
+  @media ${props => props.theme.mobile} {
+    width: 100%;
+    padding: 1rem;
+  }
 `;
 const Title = styled.div`
   margin-top: 80px;
@@ -51,18 +55,27 @@ const Title = styled.div`
     font-size: 32px;
   }
   b {
-    font-size: 16px;
+    font-size: 1rem;
     margin-left: 20px;
-    color: #ddd;
+    color: ${props => props.theme.textColor};
+  }
+  @media ${props => props.theme.mobile} {
+    b {
+      margin-left: 0;
+      margin-top: 0.813rem;
+      display: block;
+    }
   }
 `;
 const Text = styled.p<{ isDark: boolean }>`
   color: ${props => (props.isDark ? "#333" : "#fff")};
   background-color: ${props => (props.isDark ? "#Fff" : "#333")};
-  border-radius: 12px;
-  padding: 30px;
-  height: 300px;
-  min-height: 300px;
+  border-radius: 0.75rem;
+  padding: 1.875rem;
+  height: 18.75rem;
+  min-height: 18.75rem;
+  @media ${props => props.theme.mobile} {
+  }
 `;
 
 function BoardDetail() {
@@ -81,16 +94,15 @@ function BoardDetail() {
     };
   }, []);
   return (
-    <>
+    <Contaienr>
       {posts
         // eslint-disable-next-line eqeqeq
         .filter(ele => ele.id == id)
         .map(ele => (
-          <Contaienr isDark={isDark} key={ele.id}>
-            <Link to='/board' className='linkBoard'>
-              <HiArrowNarrowLeft className='backBoard' />
-            </Link>
-            <Wrapper>
+            <Wrapper isDark={isDark} key={ele.id}>
+              <Link to='/board' className='linkBoard'>
+                <HiArrowNarrowLeft className='backBoard' />
+              </Link>
               <Title>
                 <h3>
                   {ele.title}
@@ -100,9 +112,8 @@ function BoardDetail() {
               </Title>
               <Text isDark={isDark}>{ele.text}</Text>
             </Wrapper>
-          </Contaienr>
         ))}
-    </>
+    </Contaienr>
   );
 }
 

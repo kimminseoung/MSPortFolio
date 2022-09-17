@@ -70,7 +70,6 @@ const Wrapper = styled.nav`
   }
   @media ${props => props.theme.mobile} {
     height: 55px;
-
     .logo {
       font-size: 2.125rem;
       padding-left: 10px;

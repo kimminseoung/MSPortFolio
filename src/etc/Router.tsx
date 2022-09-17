@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./../pages/Home";
-import NotFound from "./../pages/NotFound";
-import Board from "../pages/Board";
-import Display from "./Layout";
+import Home from "../pages/Home";
+import NotFound from "../pages/NotFound";
+import Display from "../components/Layout";
 import About from "../pages/About";
-import Project from "./../pages/Project";
-import WriteBoard from "./Board/WriteBoard";
-import BoardDetail from "./Board/BoardDetail";
+import Project from "../pages/Project";
+import WriteBoard from "../components/Board/WriteBoard";
+import BoardDetail from "../components/Board/BoardDetail";
+import Board from "../pages/Board";
 
 function Router() {
   return (

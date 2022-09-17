@@ -8,21 +8,25 @@ import { DocumentData } from "firebase/firestore";
 import { fetchProject } from "../etc/firebase";
 
 const Container = styled(motion.section)`
-  background-color: ${props => (props.theme.bgColor)};
-  padding: 65px 20px 20px;
+  padding: 5.75rem 3.25rem 0;
+  @media ${props => props.theme.mobile} {
+    padding: 5.75rem 20px 0;
+  }
 `;
 const ContentBox = styled(motion.div)`
+  margin-top: 1.875rem;
   display: grid;
   overflow-y: scroll;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 30px;
-  flex-wrap: wrap;
+  grid-template-columns: repeat(2, 1fr);
+  @media ${props => props.theme.mobile} {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const ProjectBox = styled(motion.div)`
-  height: 400px;
+  height: 27.25rem;
   background-color: #3e3e3e;
-  margin: 5px;
+  margin: 1.563rem;
   overflow: hidden;
   position: relative;
   color: #fff;
@@ -35,29 +39,32 @@ const ProjectBox = styled(motion.div)`
       transition: 0.3s;
     }
   }
-  & > h3 {
+  .title {
     position: absolute;
     bottom: 0;
     border-radius: 8px;
     text-transform: capitalize;
-    width: 250px;
-    background-color: #fff;
-    font-size: 22px;
-    padding: 15px;
-    opacity: 0;
+    width: 95%;
+    height: 80px;
+    line-height: 80px;
+    padding-left: 20px;
+    background-color: ${props => props.theme.textColor};
+    color: ${props => props.theme.bgColor};
+    font-size: 1rem;
     left: 50%;
+    border: 1px solid ${props=>props.theme.bgColor};
     transform: translate(-50%, -20%);
-    color: #333;
     transition: 0.3s;
+    opacity: 0;
     visibility: hidden;
   }
-  &:hover h3 {
+  &:hover .title {
     bottom: 3%;
     opacity: 1;
     visibility: visible;
   }
-  &:hover img {
-    transform: scale(1.3);
+  @media ${props => props.theme.mobile} {
+    margin: 1rem;
   }
 `;
 
@@ -73,9 +80,7 @@ export interface projectState {
 
 function Project() {
   const setId = useSetRecoilState(ModalText);
-
   const [DB, setDB] = useState([]);
-
   useEffect(() => {
     fetchProject().then(data => {
       const context = data.docs.map((doc: DocumentData) => ({
@@ -104,7 +109,7 @@ function Project() {
               <div className='imgBox'>
                 <img src={require(`../img/${element.img}.png`)} alt={`${element.img}`} />
               </div>
-              <h3>{element.name}</h3>
+              <h3 className="title">{element.name}</h3>
             </ProjectBox>
           ))}
         </ContentBox>

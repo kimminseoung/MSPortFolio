@@ -3,9 +3,10 @@ import { useRecoilValue } from "recoil";
 import { DarkModeValue } from "./../etc/atom";
 const TitleText = styled.div<{ isDark: boolean }>`
   overflow: hidden;
-  margin-bottom: 15px;
+  margin-bottom: 0.938rem;
   span {
     display: inline-block;
+    padding-bottom: 0.5rem;
     position: relative;
     letter-spacing: 7px;
     text-transform: uppercase;
@@ -13,7 +14,7 @@ const TitleText = styled.div<{ isDark: boolean }>`
     color: ${props => (props.isDark ? "#fff" : "#333")};
     &::after {
       content: "";
-      margin-left: 25px;
+      margin-left: 1.563rem;
       position: absolute;
       width: 5000px;
       height: 1px;
@@ -26,9 +27,6 @@ const TitleText = styled.div<{ isDark: boolean }>`
   @media ${props => props.theme.mobile} {
     span {
       letter-spacing: 2px;
-      &::after {
-        /* width: 100%; */
-      }
     }
   }
 `;

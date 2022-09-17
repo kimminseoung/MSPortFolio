@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import Pagination from "../components/Board/Pagination";
-import { HiChevronDoubleDown, HiChevronDoubleUp } from "react-icons/hi";
 import { Link, Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { DarkModeValue } from "./../etc/atom";
@@ -19,15 +18,15 @@ export interface Iboard {
 interface isDark {
   isdark: boolean;
 }
-const Board = styled.div<isDark>`
-  background-color: ${props => (props.isdark ? props.theme.bgColor : "#f6fffb")};
+const Container = styled.div<isDark>`
+  background-color: ${props => props.theme.bgColor};
   height: 100%;
   padding: 0 1.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
   #title h3 {
-    color: ${props => (props.isdark ? "#fff" : "#333")};
+    color: ${props => props.theme.textColor};
   }
   .wrapper {
     width: 100%;
@@ -38,16 +37,6 @@ const Board = styled.div<isDark>`
     padding: 0 1.25rem;
     justify-content: space-between;
     margin-bottom: 2.188rem;
-    /* #Btns {
-      span {
-        margin: 0 12px;
-        cursor: pointer;
-        padding: 3px;
-        &:not(:nth-child(1)) {
-          color: ${props => (props.isdark ? "#fff" : "#333")};
-        }
-      }
-    } */
     .writeBtn {
       background-color: dodgerblue;
       border-radius: 8px;
@@ -86,7 +75,7 @@ const BoardList = styled.ul<isDark>`
   }
 `;
 
-function Etc() {
+function Board() {
   const isDark = useRecoilValue(DarkModeValue); // 다크모드 상태
   const [page, setPage] = useState(1); // 페이지 번호
   const limit = useRef<number>(10); //화면에 보여줄 게시판 글 수
@@ -105,7 +94,7 @@ function Etc() {
   }, []);
   const offset = (page - 1) * limit.current;
   return (
-    <Board isdark={isDark}>
+    <Container isdark={isDark}>
       <div className='wrapper'>
         <header>
           <div id='title'>
@@ -115,12 +104,6 @@ function Etc() {
             <span className='writeBtn'>
               <Link to={"WriteBoard"}>글쓰기</Link>
             </span>
-            {/*             <span>
-              <HiChevronDoubleDown />
-            </span>
-            <span>
-              <HiChevronDoubleUp />
-            </span> */}
           </div>
         </header>
         <main>
@@ -145,8 +128,8 @@ function Etc() {
         </footer>
       </div>
       <Outlet />
-    </Board>
+    </Container>
   );
 }
 
-export default Etc;
+export default Board;

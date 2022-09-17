@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { OpenMobileMenu } from "../etc/atom";
 
 const Menu = styled.div<{ isOpen: boolean }>`
@@ -12,7 +12,7 @@ const Menu = styled.div<{ isOpen: boolean }>`
     width: 80%;
     transition: 0.3s ease-in-out;
     height: 2px;
-    background-color: #000;
+    background-color: ${props=>props.theme.textColor};
     &:nth-child(1) {
       top: ${props => (props.isOpen ? "50%" : "25%")};
       transform: ${props => (props.isOpen ? "rotate(45deg)" : "rotate(0)")};
