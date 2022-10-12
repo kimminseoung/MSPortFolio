@@ -6,40 +6,47 @@ import { useSetRecoilState } from "recoil";
 import { ModalText } from "../etc/atom";
 import { DocumentData } from "firebase/firestore";
 import { fetchProject } from "../etc/firebase";
+import { Loading } from "../components/Loading";
+import { FaGripLines } from "react-icons/fa";
+import { BsGridFill } from "react-icons/bs";
 
 const Container = styled(motion.section)`
   padding: 5.75rem 3.25rem 0;
   @media ${props => props.theme.mobile} {
     padding: 5.75rem 20px 0;
   }
+  .button {
+    text-align: right;
+    button {
+      background-color: transparent;
+      border: none;
+      font-size: 24px;
+    }
+  }
 `;
-const ContentBox = styled(motion.div)`
+const ContentBox = styled(motion.div)<{ shape: boolean }>`
   margin-top: 1.875rem;
   display: grid;
   overflow-y: scroll;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: ${props => (props.shape ? "repeat(2, 1fr)" : "repeat(1, 1fr)")};
   @media ${props => props.theme.mobile} {
     grid-template-columns: repeat(1, 1fr);
   }
 `;
-
 const ProjectBox = styled(motion.div)`
-  height: 27.25rem;
+  cursor: pointer;
+  height: 21.25rem;
   background-color: #3e3e3e;
   margin: 1.563rem;
   overflow: hidden;
   position: relative;
-  color: #fff;
   .imgBox {
+    width: 100%;
     height: 100%;
-    img {
-      width: 100%;
-      object-fit: cover;
-      height: 100%;
-      transition: 0.3s;
-    }
+    object-fit: cover;
   }
   .title {
+    color: #fff;
     position: absolute;
     bottom: 0;
     border-radius: 8px;
@@ -52,7 +59,7 @@ const ProjectBox = styled(motion.div)`
     color: ${props => props.theme.bgColor};
     font-size: 1rem;
     left: 50%;
-    border: 1px solid ${props=>props.theme.bgColor};
+    border: 1px solid ${props => props.theme.bgColor};
     transform: translate(-50%, -20%);
     transition: 0.3s;
     opacity: 0;
@@ -65,10 +72,14 @@ const ProjectBox = styled(motion.div)`
   }
   @media ${props => props.theme.mobile} {
     margin: 1rem;
+    .title {
+      bottom: 3%;
+      opacity: 1;
+      visibility: visible;
+    }
   }
 `;
-
-export interface projectState {
+export interface ProjectProps {
   id: string;
   name: string;
   state: string;
@@ -80,6 +91,10 @@ export interface projectState {
 
 function Project() {
   const setId = useSetRecoilState(ModalText);
+  const [shape, Setshape] = useState(false);
+  const changeShape = () => {
+    Setshape(prev => !prev);
+  };
   const [DB, setDB] = useState([]);
   useEffect(() => {
     fetchProject().then(data => {
@@ -92,13 +107,15 @@ function Project() {
       fetchProject();
     };
   }, []);
-
   return (
     <Container>
-      <div>
-        <TitleForm titleName='Project' />
-        <ContentBox>
-          {DB.map((element: projectState) => (
+      <TitleForm titleName='Project' />
+      <div className='button'>
+        <button onClick={changeShape}>{shape ? <FaGripLines /> : <BsGridFill />}</button>
+      </div>
+      {DB ? (
+        <ContentBox shape={shape}>
+          {DB.map((element: ProjectProps) => (
             <ProjectBox
               key={element.name}
               layoutId={element.name}
@@ -106,14 +123,14 @@ function Project() {
                 setId(element.id);
               }}
             >
-              <div className='imgBox'>
-                <img src={require(`../img/${element.img}.png`)} alt={`${element.img}`} />
-              </div>
-              <h3 className="title">{element.name}</h3>
+              <img className='imgBox' src={require(`../img/${element.img}.png`)} alt={`${element.img}`} />
+              <h3 className='title'>{element.name}</h3>
             </ProjectBox>
           ))}
         </ContentBox>
-      </div>
+      ) : (
+        <Loading />
+      )}
     </Container>
   );
 }

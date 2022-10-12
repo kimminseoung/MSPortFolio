@@ -4,8 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ModalText } from "../etc/atom";
 import { DocumentData } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { projectState } from "../pages/Project";
+import { ProjectProps } from "../pages/Project";
 import { fetchProject } from "../etc/firebase";
+import { AiOutlineCloseSquare } from "react-icons/ai";
 
 const Overlay = styled(motion.div)`
   position: absolute;
@@ -13,15 +14,33 @@ const Overlay = styled(motion.div)`
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 11111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 11110;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+const Close = styled.div`
+  position: absolute;
+  cursor: pointer;
+  top: 13px;
+  right: 13px;
+  font-size: 2.375rem;
   @media ${props => props.theme.mobile} {
-    padding: 0 1.875rem;
+    font-size: 1.125rem;
+  }
+`;
+const Container = styled(motion.div)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11111;
+  @media ${props => props.theme.mobile} {
+    padding: 0;
   }
 `;
 const Contents = styled(motion.div)`
+  position: relative;
+  width: 900px;
+  height: 450px;
   overflow-y: scroll;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 1.25rem;
@@ -62,46 +81,46 @@ const Contents = styled(motion.div)`
     margin-top: 10px;
   }
   @media ${props => props.theme.mobile} {
+    width: 100%;
     padding: 6px;
     & > div {
       width: 100%;
     }
     flex-direction: column-reverse;
+    .text {
+      & > div {
+        margin-bottom: 0;
+      }
+    }
   }
 `;
 const modalBackGround = {
   init: {
-    backgroundColor: "rgba(0,0,0,0)",
     opacity: 0,
     visiBility: "hidden",
   },
   start: {
     opacity: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
     visiBility: "visible",
   },
   end: {
     opacity: 0,
-    backgroundColor: "rgba(0,0,0,0)",
     visiBility: "hidden",
   },
 };
 const modalForm = {
   init: {
-    width: 0,
-    height: 0,
-    y: 10,
+    y: -10,
     opacity: 0,
   },
   start: {
-    width: 730,
-    height: 500,
     opacity: 1,
     y: 0,
+    transition: {
+      type: "tween",
+    },
   },
   end: {
-    width: 0,
-    height: 200,
     opacity: 0,
     y: 10,
   },
@@ -120,48 +139,48 @@ function Modal() {
       fetchProject();
     };
   }, []);
+  const hidden = () => {
+    setId("");
+  };
   return (
     <AnimatePresence>
       {id ? (
-        <Overlay
-          onClick={() => {
-            setId("");
-          }}
-          variants={modalBackGround}
-          initial='init'
-          animate='start'
-          exit={"end"}
-        >
-          {DB.filter((ele: any) => ele.id === id).map((ele: projectState) => (
-            <Contents variants={modalForm} initial='init' animate='start' exit={"end"} key={ele.id} layoutId={id}>
-              <div>
-                <img src={require(`../img/${ele.img}.png`)} alt={`${ele.img}`} />
-              </div>
-              <div className='text'>
-                <div>
-                  <h3>{ele.name}</h3>
+        <>
+          <Overlay onClick={hidden} />
+          <Container variants={modalBackGround} initial='init' animate='start' exit='end'>
+            {DB.filter((ele: any) => ele.id === id).map((ele: ProjectProps) => (
+              <Contents variants={modalForm} initial='init' animate='start' exit='end' key={ele.id} layoutId={id}>
+                <div className='image'>
+                  <img src={require(`../img/${ele.img}.png`)} alt={`${ele.img}`} />
                 </div>
-                <div>◆ 개발기간: {ele.state}</div>
-                <div>
-                  <span style={{ paddingBottom: "5px" }}>◆ 기술</span>
-                  <ul className='skillList'>
-                    {ele.skill.map((ele, index) => (
-                      <li key={index}>- {ele}</li>
-                    ))}
-                  </ul>
+                <div className='text'>
+                  <div>
+                    <h3>{ele.name}</h3>
+                  </div>
+                  <div>
+                    <span style={{ paddingBottom: "5px" }}>◆ 기술</span>
+                    <ul className='skillList'>
+                      {ele.skill.map((ele, index) => (
+                        <li key={index}>- {ele}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    ◆ GitPage
+                    <a href={ele.gitLink}>{ele.gitLink}</a>
+                  </div>
+                  <div>
+                    ◆ GitCode
+                    <a href={ele.gitLink}>{ele.gitCode}</a>
+                  </div>
                 </div>
-                <div>
-                  ◆ GitPage
-                  <a href={ele.gitLink}>{ele.gitLink}</a>
-                </div>
-                <div>
-                  ◆ GitCode
-                  <a href={ele.gitLink}>{ele.gitCode}</a>
-                </div>
-              </div>
-            </Contents>
-          ))}
-        </Overlay>
+              </Contents>
+            ))}
+            <Close onClick={hidden}>
+              <AiOutlineCloseSquare />
+            </Close>
+          </Container>
+        </>
       ) : null}
     </AnimatePresence>
   );

@@ -5,14 +5,13 @@ import { OpenMobileMenu } from "../etc/atom";
 const Menu = styled.div<{ isOpen: boolean }>`
   width: 10%;
   height: 65%;
-  z-index: 1111111;
   position: relative;
   & > span {
     position: absolute;
     width: 80%;
     transition: 0.3s ease-in-out;
     height: 2px;
-    background-color: ${props=>props.theme.textColor};
+    background-color: ${props => props.theme.textColor};
     &:nth-child(1) {
       top: ${props => (props.isOpen ? "50%" : "25%")};
       transform: ${props => (props.isOpen ? "rotate(45deg)" : "rotate(0)")};
@@ -28,7 +27,7 @@ const Menu = styled.div<{ isOpen: boolean }>`
   }
 `;
 function MobileMenu() {
-  const [open,setOpen] = useRecoilState(OpenMobileMenu);
+  const [open, setOpen] = useRecoilState(OpenMobileMenu);
   return (
     <Menu
       className='mMenu'

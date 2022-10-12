@@ -6,9 +6,10 @@ import { useRecoilValue } from "recoil";
 import { DarkModeValue } from "./../etc/atom";
 import { fetchBoard } from "../etc/firebase";
 import { DocumentData } from "firebase/firestore";
+
 export interface Iboard {
   createdDate: number;
-  id: number | string | undefined;
+  id: number | string;
   name: string;
   text: string;
   title: string;

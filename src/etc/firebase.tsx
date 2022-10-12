@@ -52,56 +52,65 @@ export const fetchProject = async (): Promise<DocumentData> => {
   return ProDB;
 };
 
-export const fetchBoard2 = async () => {
+/* export const fetchBoard2 = async () => {
   const citiesRef = collection(db, "Projects");
+    await setDoc(doc(citiesRef, "1"), {
+      id: "1",
+      name: "넷플릭스 클론코딩",
+      state: "2022.09",
+      gitCode: "https://github.com/kimminseoung/NetFlix_clone",
+      gitLink: " https://kimminseoung.github.io/NetFlix_clone/",
+      img: "netflix",
+      skill: ["React", "TypeScript", "framer-motion", "styled-components", "Recoil", "react - router","swiper"],
+    });
 
-  await setDoc(doc(citiesRef, "1"), {
-    id: "1",
-    name: "나의 포트폴리오",
-    state: "2022.08~2022.09",
-    gitCode: "https://github.com/kimminseoung/PortFolio",
-    gitLink: "https://kimminseoung.github.io/portfolio/",
-    img: "myhome",
-    skill: ["React", "TypeScript", "framer-motion", "styled-components", "Recoil", "react - router"],
-  });
+  // await setDoc(doc(citiesRef, "1"), {
+  //   id: "1",
+  //   name: "나의 포트폴리오",
+  //   state: "2022.08~2022.09",
+  //   gitCode: "https://github.com/kimminseoung/PortFolio",
+  //   gitLink: "https://kimminseoung.github.io/portfolio/",
+  //   img: "myhome",
+  //   skill: ["React", "TypeScript", "framer-motion", "styled-components", "Recoil", "react - router"],
+  // });
 
-  await setDoc(doc(citiesRef, "2"), {
-    id: "2",
-    name: "Lottery",
-    state: "2022.08",
-    gitCode: "https://github.com/kimminseoung/Lottery",
-    gitLink: "https://kimminseoung.github.io/Lottery/",
-    img: "lottery",
-    skill: ["HTML", "CSS", "JavaScript"],
-  });
+  // await setDoc(doc(citiesRef, "2"), {
+  //   id: "2",
+  //   name: "Lottery",
+  //   state: "2022.08",
+  //   gitCode: "https://github.com/kimminseoung/Lottery",
+  //   gitLink: "https://kimminseoung.github.io/Lottery/",
+  //   img: "lottery",
+  //   skill: ["HTML", "CSS", "JavaScript"],
+  // });
 
-  await setDoc(doc(citiesRef, "3"), {
-    id: "3",
-    name: "코인정보 사이트",
-    state: "2022.06",
-    gitCode: "https://kimminseoung.github.io/K_Coin/",
-    gitLink: "https://kimminseoung.github.io/K_Coin/",
-    img: "coininfo",
-    skill: ["React", "TypeScript", "framer-motion", "styled-components", "Recoil", "react - router"],
-  });
+  // await setDoc(doc(citiesRef, "3"), {
+  //   id: "3",
+  //   name: "코인정보 사이트",
+  //   state: "2022.06",
+  //   gitCode: "https://kimminseoung.github.io/K_Coin/",
+  //   gitLink: "https://kimminseoung.github.io/K_Coin/",
+  //   img: "coininfo",
+  //   skill: ["React", "TypeScript", "framer-motion", "styled-components", "Recoil", "react - router"],
+  // });
 
-  await setDoc(doc(citiesRef, "4"), {
-    id: "4",
-    name: "todoList",
-    state: "2022.06",
-    gitCode: "https://github.com/kimminseoung/ToyApp",
-    gitLink: "https://kimminseoung.github.io/ToyApp/",
-    img: "todolist",
-    skill: ["HTML", "CSS", "JavaScript"],
-  });
+  // await setDoc(doc(citiesRef, "4"), {
+  //   id: "4",
+  //   name: "todoList",
+  //   state: "2022.06",
+  //   gitCode: "https://github.com/kimminseoung/ToyApp",
+  //   gitLink: "https://kimminseoung.github.io/ToyApp/",
+  //   img: "todolist",
+  //   skill: ["HTML", "CSS", "JavaScript"],
+  // });
 
-  await setDoc(doc(citiesRef, "5"), {
-    id: "5",
-    name: "카드 짝 맞추기",
-    state: "2022.08",
-    gitCode: "https://github.com/kimminseoung/Card-matching-Game",
-    gitLink: "https://kimminseoung.github.io/Card-matching-Game",
-    img: "cardgame",
-    skill: ["HTML", "CSS", "JavaScript"],
-  });
-};
+  // await setDoc(doc(citiesRef, "5"), {
+  //   id: "5",
+  //   name: "카드 짝 맞추기",
+  //   state: "2022.08",
+  //   gitCode: "https://github.com/kimminseoung/Card-matching-Game",
+  //   gitLink: "https://kimminseoung.github.io/Card-matching-Game",
+  //   img: "cardgame",
+  //   skill: ["HTML", "CSS", "JavaScript"],
+  // });
+}; */

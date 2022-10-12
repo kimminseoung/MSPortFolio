@@ -23,7 +23,7 @@ const Picture = styled.div`
   & > img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
   }
 
   @media ${props => props.theme.mobile} {
@@ -32,7 +32,7 @@ const Picture = styled.div`
 `;
 const Contents = styled.div`
   width: calc(100% - 35%);
-  background-color: ${props=>props.theme.bgColor};
+  background-color: ${props => props.theme.bgColor};
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -47,7 +47,7 @@ function Layout() {
     <Container>
       <div>
         <Picture>
-          <img src={require("../img/flowers.png")} alt='street' />
+          <img src={require("../img/ride.png")} alt='street' />
         </Picture>
         <Contents>
           <Outlet />

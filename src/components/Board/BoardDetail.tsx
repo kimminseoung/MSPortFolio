@@ -96,22 +96,21 @@ function BoardDetail() {
   return (
     <Contaienr>
       {posts
-        // eslint-disable-next-line eqeqeq
-        .filter(ele => ele.id == id)
+        .filter(ele => ele.id === Number(id))
         .map(ele => (
-            <Wrapper isDark={isDark} key={ele.id}>
-              <Link to='/board' className='linkBoard'>
-                <HiArrowNarrowLeft className='backBoard' />
-              </Link>
-              <Title>
-                <h3>
-                  {ele.title}
-                  <b>작성자: {ele.name}</b>
-                  <b>{ele.time}</b>
-                </h3>
-              </Title>
-              <Text isDark={isDark}>{ele.text}</Text>
-            </Wrapper>
+          <Wrapper isDark={isDark} key={ele.id}>
+            <Link to='/board' className='linkBoard'>
+              <HiArrowNarrowLeft className='backBoard' />
+            </Link>
+            <Title>
+              <h3>
+                {ele.title}
+                <b>작성자: {ele.name}</b>
+                <b>{ele.time}</b>
+              </h3>
+            </Title>
+            <Text isDark={isDark}>{ele.text}</Text>
+          </Wrapper>
         ))}
     </Contaienr>
   );

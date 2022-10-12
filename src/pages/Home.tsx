@@ -18,7 +18,7 @@ const Wrapper = styled(motion.div)`
     padding-left: 4.25rem;
   }
   .name {
-    font-size: 4.5rem;
+    font-size: 4.1rem;
     font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 1.875rem;

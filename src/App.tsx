@@ -4,11 +4,11 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Modal from "./components/Modal";
 import Router from "./etc/Router";
-import { DarkModeValue } from "./etc/atom";
+import { DarkModeValue, OpenMobileMenu } from "./etc/atom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { DarkTheme, LightTheme } from "./etc/theme";
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ bodyOverflow: boolean }>`
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -49,6 +49,8 @@ body {
   }
   @media ${props => props.theme.mobile}{
 		padding: 0;
+		height:  ${props => (props.bodyOverflow ? "100%" : "initial")};
+		overflow: ${props => (props.bodyOverflow ? "hidden" : "visible")};
   }
 	background-color: ${props => props.theme.bgColor};
 	font-family: 'Open Sans', sans-serif;
@@ -83,7 +85,7 @@ a {
 `;
 function App() {
   const isDark = useRecoilValue(DarkModeValue);
-
+  const openMobile = useRecoilValue(OpenMobileMenu);
   return (
     <ThemeProvider theme={isDark ? DarkTheme : LightTheme}>
       <Header />
@@ -91,7 +93,7 @@ function App() {
       <Modal />
       <DarkMode />
       <Footer />
-      <GlobalStyle />
+      <GlobalStyle bodyOverflow={openMobile} />
     </ThemeProvider>
   );
 }
