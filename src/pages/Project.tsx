@@ -12,16 +12,17 @@ import { BsGridFill } from "react-icons/bs";
 
 const Container = styled(motion.section)`
   padding: 5.75rem 3.25rem 0;
-  @media ${props => props.theme.mobile} {
-    padding: 5.75rem 20px 0;
-  }
   .button {
     text-align: right;
     button {
+      color: ${props=>props.theme.textColor};
       background-color: transparent;
       border: none;
       font-size: 24px;
     }
+  }
+  @media ${props => props.theme.mobile} {
+    padding: 5.75rem 20px 0;
   }
 `;
 const ContentBox = styled(motion.div)<{ shape: boolean }>`
@@ -29,9 +30,6 @@ const ContentBox = styled(motion.div)<{ shape: boolean }>`
   display: grid;
   overflow-y: scroll;
   grid-template-columns: ${props => (props.shape ? "repeat(2, 1fr)" : "repeat(1, 1fr)")};
-  @media ${props => props.theme.mobile} {
-    grid-template-columns: repeat(1, 1fr);
-  }
 `;
 const ProjectBox = styled(motion.div)`
   cursor: pointer;
@@ -65,13 +63,17 @@ const ProjectBox = styled(motion.div)`
     opacity: 0;
     visibility: hidden;
   }
+  &:hover {
+    filter: grayscale(100%);
+  }
   &:hover .title {
     bottom: 3%;
     opacity: 1;
     visibility: visible;
   }
   @media ${props => props.theme.mobile} {
-    margin: 1rem;
+    height: 15.25rem;
+    margin: 0.5rem;
     .title {
       bottom: 3%;
       opacity: 1;
@@ -87,6 +89,7 @@ export interface ProjectProps {
   gitLink: string;
   gitCode: string;
   img: string;
+  text: string;
 }
 
 function Project() {

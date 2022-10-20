@@ -87,6 +87,7 @@ function About() {
         <AboutMe  variants={showHideChild}>
           <TitleForm titleName='웹 개발자를 하고 싶은 이유와 자바스크립트를 선택한 이유?' />
           <div className='text'>
+            퍼블리셔로 일하면서 관리하던 회사 페이지를 관리를 하면서 
             무엇을 만들면 바로 결과물이 눈에 보이는게 재미가 있어 웹 개발자에 도전하고 싶어졌다. 개인적으로 효율적인 것을 좋아하는 성향이 있는데 자바스크립트는 서버, 게임 등을 만들 수 있다는 것에
             매력을 느껴 선택하게 되었다.
           </div>
@@ -173,26 +174,6 @@ function About() {
                 </TechImage>
               </TechList>
             </div>
-            {/* <div>
-              <Subheading>- currently studying</Subheading>
-              <TechList>
-                <TechImage>
-                  <img src={require("../img/node.png")} alt='' />
-                </TechImage>
-                <TechImage>
-                  <img src={require("../img/express.png")} alt='' />
-                </TechImage>
-                <TechImage>
-                  <img src={require("../img/js.png")} alt='' />
-                </TechImage>
-                <TechImage>
-                  <img src={require("../img/typescript.png")} alt='' />
-                </TechImage>
-                <TechImage>
-                  <img src={require("../img/mongo.png")} alt='' />
-                </TechImage>
-              </TechList>
-            </div> */}
           </div>
         </AboutMe>
       </motion.div>

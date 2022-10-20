@@ -18,7 +18,7 @@ const Container = styled.main`
   }
 `;
 const Picture = styled.div`
-  width: 35%;
+  width: 43%;
   position: relative;
   & > img {
     width: 100%;

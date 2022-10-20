@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { ProjectProps } from "../pages/Project";
 import { fetchProject } from "../etc/firebase";
 import { AiOutlineCloseSquare } from "react-icons/ai";
-
+import { BsFillDice1Fill, BsFillDice2Fill, BsFillDice3Fill, BsFillDice4Fill } from "react-icons/bs";
 const Overlay = styled(motion.div)`
   position: absolute;
   width: 100%;
@@ -18,14 +18,12 @@ const Overlay = styled(motion.div)`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 const Close = styled.div`
-  position: absolute;
+  position: fixed;
   cursor: pointer;
   top: 13px;
+  color: ${props => props.theme.textColor};
   right: 13px;
   font-size: 2.375rem;
-  @media ${props => props.theme.mobile} {
-    font-size: 1.125rem;
-  }
 `;
 const Container = styled(motion.div)`
   position: absolute;
@@ -39,16 +37,25 @@ const Container = styled(motion.div)`
 `;
 const Contents = styled(motion.div)`
   position: relative;
-  width: 900px;
-  height: 450px;
+  width: 1200px;
+  height: 600px;
   overflow-y: scroll;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: ${props => props.theme.bgColor};
+  color: ${props => props.theme.textColor};
   border-radius: 1.25rem;
   box-shadow: 0 2px 3px rgba(255, 255, 255, 0.1), 0 10px 20px rgba(255, 255, 255, 0.06);
   display: flex;
   padding: 1.25rem;
   & > div {
     width: 50%;
+    b {
+      vertical-align: middle;
+      padding-right: 3px;
+      svg {
+        color: ${props => props.theme.textColor};
+        font-size: 1rem;
+      }
+    }
     h3 {
       font-size: 1.75rem;
     }
@@ -59,7 +66,6 @@ const Contents = styled(motion.div)`
       object-fit: cover;
     }
     a {
-      display: block;
       padding-left: 1.375rem;
       margin-top: 0.938rem;
       font-size: 0.875rem;
@@ -74,6 +80,13 @@ const Contents = styled(motion.div)`
       margin-bottom: 1.875rem;
     }
   }
+  .subtitle {
+    padding-bottom: 5px;
+  }
+  .description {
+    line-height: 1.6rem;
+    padding-left: 1rem;
+  }
   .skillList {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -82,14 +95,20 @@ const Contents = styled(motion.div)`
   }
   @media ${props => props.theme.mobile} {
     width: 100%;
+    height: 100%;
     padding: 6px;
     & > div {
       width: 100%;
     }
     flex-direction: column-reverse;
+    a {
+      margin-top: 0.538rem;
+    }
     .text {
+      padding-left: 0;
+      padding-top: 0;
       & > div {
-        margin-bottom: 0;
+        margin-bottom: 1.175rem;
       }
     }
   }
@@ -122,7 +141,7 @@ const modalForm = {
   },
   end: {
     opacity: 0,
-    y: 10,
+    y: -10,
   },
 };
 function Modal() {
@@ -148,7 +167,7 @@ function Modal() {
         <>
           <Overlay onClick={hidden} />
           <Container variants={modalBackGround} initial='init' animate='start' exit='end'>
-            {DB.filter((ele: any) => ele.id === id).map((ele: ProjectProps) => (
+            {DB.filter((ele: ProjectProps) => ele.id === id).map((ele: ProjectProps) => (
               <Contents variants={modalForm} initial='init' animate='start' exit='end' key={ele.id} layoutId={id}>
                 <div className='image'>
                   <img src={require(`../img/${ele.img}.png`)} alt={`${ele.img}`} />
@@ -158,7 +177,21 @@ function Modal() {
                     <h3>{ele.name}</h3>
                   </div>
                   <div>
-                    <span style={{ paddingBottom: "5px" }}>◆ 기술</span>
+                    <h5 className='subtitle'>
+                      <b>
+                        <BsFillDice1Fill />
+                      </b>
+                      Description
+                    </h5>
+                    <p className='description'>{ele.text}</p>
+                  </div>
+                  <div>
+                    <h5 className='subtitle'>
+                      <b>
+                        <BsFillDice2Fill />
+                      </b>
+                      Use Skill
+                    </h5>
                     <ul className='skillList'>
                       {ele.skill.map((ele, index) => (
                         <li key={index}>- {ele}</li>
@@ -166,11 +199,17 @@ function Modal() {
                     </ul>
                   </div>
                   <div>
-                    ◆ GitPage
+                    <b>
+                      <BsFillDice3Fill />
+                    </b>
+                    Site
                     <a href={ele.gitLink}>{ele.gitLink}</a>
                   </div>
                   <div>
-                    ◆ GitCode
+                    <b>
+                      <BsFillDice4Fill />
+                    </b>
+                    GitHub
                     <a href={ele.gitLink}>{ele.gitCode}</a>
                   </div>
                 </div>

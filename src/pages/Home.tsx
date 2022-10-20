@@ -15,7 +15,7 @@ const HomeCotainer = styled.section`
 const Wrapper = styled(motion.div)`
   padding-left: 6.25rem;
   @media ${props => props.theme.mobile} {
-    padding-left: 4.25rem;
+    padding-left: 1rem;
   }
   .name {
     font-size: 4.1rem;
