@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/PortFolio/static/js/main.0679fc01.js",
+    "main.js": "/PortFolio/static/js/main.69f1ba31.js",
     "static/media/netflix.png": "/PortFolio/static/media/netflix.ddd4cd32252a2783ae9e.png",
     "static/media/flowers.png": "/PortFolio/static/media/flowers.6efaca280a41ae2fc8e4.png",
     "static/media/ride.png": "/PortFolio/static/media/ride.f31e7cbb603f761c670c.png",
@@ -15,9 +15,9 @@
     "static/media/cardgame.png": "/PortFolio/static/media/cardgame.fdf4ee22d4b74c6a44a9.png",
     "static/media/html.png": "/PortFolio/static/media/html.ff3cf75e3b7cbb4ea77c.png",
     "index.html": "/PortFolio/index.html",
-    "main.0679fc01.js.map": "/PortFolio/static/js/main.0679fc01.js.map"
+    "main.69f1ba31.js.map": "/PortFolio/static/js/main.69f1ba31.js.map"
   },
   "entrypoints": [
-    "static/js/main.0679fc01.js"
+    "static/js/main.69f1ba31.js"
   ]
 }
